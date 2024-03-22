@@ -63,6 +63,7 @@ The platform is composed of several essential components that collectively aim t
 ### 6.1 Use Case Diagrams
 
 The Use Case Diagram for the Food Waste Reduction Platform illustrates the interactions between the system's users: retailers, consumers, charitable organizations, and the system itself.
+![FWRP](https://github.com/artqi201908/JAVA-FINAL-PROJECT/assets/134665097/e0f0ad2d-2ca4-4269-9d12-9d75ca9557f1)
 
 ### 6.2 Description
 
