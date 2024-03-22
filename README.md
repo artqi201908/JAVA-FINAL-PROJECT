@@ -45,6 +45,7 @@ The Food Waste Reduction Platform leverages a meticulously designed modular arch
 - **Business Layer**: This is the heart of the application, where core business logic resides. It processes inputs from users, enforces business rules, executes calculations, and makes critical decisions.
 - **Data Access Layer (DAL)**: Facilitates all interactions with the database or any other form of persistence storage. It encompasses operations such as CRUD (Create, Read, Update, Delete) and manages database connections, abstracting the complexities of database operations from the rest of the application.
 - **View Layer**: Responsible for data presentation. It generates dynamic content based on user permissions and displays corresponding information in an accessible format.
+<img width="468" alt="diagram of system" src="https://github.com/artqi201908/JAVA-FINAL-PROJECT/assets/134665097/8aa809c3-092c-4390-ad63-64750a16c731">
 
 ### 5.2 Main Components
 
