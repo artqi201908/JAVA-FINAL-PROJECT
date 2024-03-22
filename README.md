@@ -1,5 +1,30 @@
 # High-Level Design Document
 
+## Table of Contents
+
+- [1. Version History](#1-version-history)
+- [2. Introduction](#2-introduction)
+- [3. Targeted Audience](#3-targeted-audience)
+- [4. Scope](#4-scope)
+  - [In Scope](#in-scope)
+  - [Out of Scope](#out-of-scope)
+- [5. Application Architecture](#5-application-architecture)
+  - [5.1 Overview of the System Architecture](#51-overview-of-the-system-architecture)
+  - [5.2 Main Components](#52-main-components)
+- [6. Business Architecture](#6-business-architecture)
+  - [6.1 Use Case Diagrams](#61-use-case-diagrams)
+  - [6.2 Description](#62-description)
+- [7. Class Diagram](#7-class-diagram)
+- [8. Database Structures](#8-database-structures)
+- [9. Security Architecture](#9-security-architecture)
+  - [9.1 Password Security](#91-password-security)
+  - [9.2 User Roles and Permissions](#92-user-roles-and-permissions)
+- [10. Deployment Architecture](#10-deployment-architecture)
+  - [10.1 Cloud Services](#101-cloud-services)
+  - [10.2 Single-instance Deployment](#102-single-instance-deployment)
+- [11. Testing Model](#11-testing-model)
+  - [11.1 JUnit](#111-junit)
+
 ## 1. Version History
 
 - **Version 1.0**: Authored by Phuong Nguyen, Danni Hu, Wenqi Tang, and Feng Qi on March 11, 2024. This initial version outlines the foundational aspects of the Food Waste Reduction Platform.
