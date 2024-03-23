@@ -14,6 +14,7 @@
 - [6. Business Architecture](#6-business-architecture)
   - [6.1 Use Case Diagrams](#61-use-case-diagrams)
   - [6.2 Description](#62-description)
+  - [6.3 User Stories](#63-user-stroies)
 - [7. Class Diagram](#7-class-diagram)
 - [8. Database Structures](#8-database-structures)
 - [9. Security Architecture](#9-security-architecture)
@@ -106,6 +107,37 @@ Use Cases:
 - **Claiming/Purchasing of Food Items**: Actors (Consumers, Charitable Organizations) claim or purchase listed food items.
 - **Donation Coordination**: Actors (Retailers, Charitable Organizations) participate in the food donation process.
 - **Waste Analytics Reporting**: Actors (Retailers, Charitable Organizations, Platform Administrators) access reports and analytics on food waste patterns.
+
+### 6.3 User Stories
+
+- **User Story: Registration and Login**
+  - **Summary**: As a user, I want to easily register and log in to the FWRP so that I can start using the platform's features.
+  - **Acceptance Criteria**:
+    - Users can register with basic information and receive an email verification.
+    - Users can log in and have access to their account information.
+
+- **User Story: Inventory Management**
+  - **Summary**: As a retailer, I need to manage my food inventory on the platform to keep track of surplus food.
+  - **Acceptance Criteria**:
+    - Retailers can add and update food information in their inventory.
+    - The system provides reminders for food items nearing expiration.
+
+- **User Story: Food Donation**
+  - **Summary**: As a charitable organization, I want to find available food donations through the platform.
+  - **Acceptance Criteria**:
+    - Charitable organizations can view and request surplus food donations.
+
+- **User Story: Data Reporting**
+  - **Summary**: As an administrator, I want to view reports on donations and requests to understand the platform's usage.
+  - **Acceptance Criteria**:
+    - Administrators can access and export reports on food donations and requests.
+
+- **User Story: System Security**
+  - **Summary**: As a system administrator, I need to ensure the security of the system's data, including user information and transaction data.
+  - **Acceptance Criteria**:
+    - The system encrypts and securely stores passwords.
+    - The system implements access control for different user roles.
+
 
 ## 7. Class Diagram
 
