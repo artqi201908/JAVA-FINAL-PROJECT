@@ -14,7 +14,7 @@
 - [6. Business Architecture](#6-business-architecture)
   - [6.1 Use Case Diagrams](#61-use-case-diagrams)
   - [6.2 Description](#62-description)
-  - [6.3 User Stories](#63-user-stroies)
+  - [6.3 User Stories](#63-user-stories)
 - [7. Class Diagram](#7-class-diagram)
 - [8. Database Structures](#8-database-structures)
 - [9. Security Architecture](#9-security-architecture)
