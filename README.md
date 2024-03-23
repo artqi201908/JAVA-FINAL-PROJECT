@@ -132,6 +132,12 @@ Use Cases:
   - **Acceptance Criteria**:
     - Administrators can access and export reports on food donations and requests.
 
+- **User Story: Waste Analytics Reporting**
+  - **Summary**: As a retailer, charitable organization, or platform administrator, I want to access reports and analytics on food waste patterns.
+  - **Acceptance Criteria**:
+    - Retailers, charitable organizations, and platform administrators can access detailed analytics and reports regarding food waste patterns and trends.
+    - The system provides actionable insights to help reduce food waste.
+
 - **User Story: System Security**
   - **Summary**: As a system administrator, I need to ensure the security of the system's data, including user information and transaction data.
   - **Acceptance Criteria**:
