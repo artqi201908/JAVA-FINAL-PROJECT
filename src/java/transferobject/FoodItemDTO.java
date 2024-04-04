@@ -5,18 +5,24 @@ import java.util.Date;
 
 
 public class FoodItemDTO {
+
+
     private int itemId;
     private String name;
     private int quantity;
     private Date expirationDate;
-    private BigDecimal price;
-    private BigDecimal discountRate;
+
+
+
+    private double price;
+    private double discountRate;
     private boolean isForDonation;
     private int userId;
 
 
     public FoodItemDTO() {
     }
+
     public int getItemId() {
         return itemId;
     }
@@ -24,6 +30,7 @@ public class FoodItemDTO {
     public void setItemId(int itemId) {
         this.itemId = itemId;
     }
+
 
     public String getName() {
         return name;
@@ -49,21 +56,23 @@ public class FoodItemDTO {
         this.expirationDate = expirationDate;
     }
 
-    public BigDecimal getPrice() {
+
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public BigDecimal getDiscountRate() {
+    public double getDiscountRate() {
         return discountRate;
     }
 
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
     }
+
 
     public boolean isForDonation() {
         return isForDonation;
