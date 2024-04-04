@@ -1,4 +1,4 @@
-package java.dataaccesslayer;
+package dataaccesslayer;
 
 import java.transferobject.FoodWasteTrackerDTO;
 import java.util.List;

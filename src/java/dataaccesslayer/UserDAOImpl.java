@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package java.dataaccesslayer;
 
-import java.dataaccesslayer.UserDAO;
+package dataaccesslayer;
+
+import dataaccesslayer.UserDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt = con.prepareStatement(query);
 
             rs = pstmt.executeQuery();
-            users = new ArrayList<UserDTO>();
+            users = new ArrayList<>();
             while (rs.next()) {
                 UserDTO user = new UserDTO();
                 int userId = rs.getInt("UserID");
@@ -122,8 +123,7 @@ public class UserDAOImpl implements UserDAO {
         boolean success = false;
         
         try {
-            DataSource ds = new DataSource();
-            connection = ds.getConnection();
+            connection = DataSource.getConnection();
             preparedStatement = connection.prepareStatement("INSERT INTO Users (Email, Name, Password, UserType) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getName());
