@@ -3,6 +3,7 @@ package java.transferobject;
 import java.math.BigDecimal;
 import java.util.Date;
 
+
 public class FoodItemDTO {
     private int itemId;
     private String name;
