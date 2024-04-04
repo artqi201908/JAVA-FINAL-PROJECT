@@ -14,7 +14,8 @@ import transferobject.UserDTO;
  * @author phron
  */
 public class UserBusinessLogic {
-     private UserDAOImpl usersDao = null;
+
+    private UserDAOImpl usersDao = null;
 
     public UserBusinessLogic() {
         usersDao = new UserDAOImpl();
@@ -24,10 +25,10 @@ public class UserBusinessLogic {
         return usersDao.getAllUsers();
     }
 
-    public void addUser(UserDTO user) {
-        usersDao.addUser(user);
-    }
     public boolean validateCredentials(String username, String password) {
         return usersDao.validate(username, password);
     }
-}
+
+    public boolean addUser(UserDTO user) {
+           return usersDao.addUser(user);   
+}}

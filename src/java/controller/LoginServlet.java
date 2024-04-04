@@ -7,10 +7,14 @@ package controller;
 import businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transferobject.UserDTO;
 
 /**
  *
@@ -56,7 +60,18 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       UserBusinessLogic authorBusinessLogic = new UserBusinessLogic();
+        List<UserDTO> users = null;
+
+        try {
+            users = authorBusinessLogic.getAllUsers();
+        } catch (SQLException ex) {
+            log(ex.getMessage());
+        }
+
+        request.setAttribute("authors", users);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/login.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**

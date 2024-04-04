@@ -17,6 +17,7 @@ import transferobject.UserDTO;
  * @author phron
  */
 public class UserDAOImpl implements UserDAO {
+    public UserDAOImpl(){}
     
     @Override
     public List<UserDTO> getAllUsers() {
@@ -114,37 +115,27 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void addUser(UserDTO user) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-
+    public boolean addUser(UserDTO user) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        boolean success = false;
+        
         try {
-            con = DataSource.getConnection();
-
-            pstmt = con.prepareStatement(
-                    "INSERT INTO Users (Name,Email,Password,UserType) "
-                    + "VALUES(?, ?,?,?)");
-            pstmt.setString(1, user.getName());
-            pstmt.setString(2, user.getEmail());
-            pstmt.setString(3, user.getPassword());
-            pstmt.setInt(4, user.getUserType());
-            pstmt.executeUpdate();
+            DataSource ds = new DataSource();
+            connection = ds.getConnection();
+            preparedStatement = connection.prepareStatement("INSERT INTO Users (Email, Name, Password, UserType) VALUES (?, ?, ?, ?)");
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setInt(4, user.getUserType());
+             
+            int rowsAffected = preparedStatement.executeUpdate();
+            success = rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-//            try {
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
         }
-    }
+        return success;
+	}
 
     @Override
     public void updateUser(UserDTO user) {
@@ -159,7 +150,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
-            pstmt.setInt(4, user.getUserType());
+            pstmt.setInt(4, user.getUserID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -243,7 +234,36 @@ public class UserDAOImpl implements UserDAO {
         }
     }
     return userExists;
-
      }
-
+     
+     @Override
+    public boolean emailExists(String email) {
+    Connection con = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+        con = DataSource.getConnection();
+        pstmt = con.prepareStatement("SELECT Email FROM Users WHERE Email = ?");
+        pstmt.setString(1, email);
+        rs = pstmt.executeQuery();
+        return rs.next(); // If there's at least one row, the email exists
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        close(rs);
+        close(pstmt);
+        close(con);
+    }
+    return false;
+}
+     private void close(AutoCloseable closeable) {
+    if (closeable != null) {
+        try {
+            closeable.close();
+        } catch (Exception e) {
+            // Log the exception or handle it
+            System.out.println("Failed to close resource: " + e.getMessage());
+        }
+    }
+}
 }
