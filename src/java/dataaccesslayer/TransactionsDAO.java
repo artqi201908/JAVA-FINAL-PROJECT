@@ -1,4 +1,4 @@
-package java.dataaccesslayer;
+package dataaccesslayer;
 
 import java.transferobject.TransactionDTO;
 import java.util.List;

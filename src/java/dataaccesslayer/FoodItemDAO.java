@@ -1,7 +1,7 @@
-package java.dataaccesslayer;
+package dataaccesslayer;
 
 
-import java.transferobject.FoodItemDTO;
+import transferobject.FoodItemDTO;
 import java.util.List;
 
 /**
