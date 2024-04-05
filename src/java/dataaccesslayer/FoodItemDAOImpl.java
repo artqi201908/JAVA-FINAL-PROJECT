@@ -11,7 +11,7 @@ import java.transferobject.FoodItemDTO;
 
 public class FoodItemDAOImpl implements FoodItemDAO {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     public FoodItemDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -19,12 +19,16 @@ public class FoodItemDAOImpl implements FoodItemDAO {
 
     @Override
     public List<FoodItemDTO> getAllFoodItems() {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         List<FoodItemDTO> foodItems = new ArrayList<>();
-        String sql = "SELECT * FROM FoodItems";
 
-        try (Connection con = dataSource.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+        try {
+            con = dataSource.getConnection();
+            String query = "SELECT * FROM FoodItems";
+            pstmt = con.prepareStatement(query);
+            rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 FoodItemDTO foodItem = new FoodItemDTO();
@@ -40,45 +44,78 @@ public class FoodItemDAOImpl implements FoodItemDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return foodItems;
     }
 
     @Override
     public FoodItemDTO getFoodItemById(int id) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         FoodItemDTO foodItem = null;
-        String sql = "SELECT * FROM FoodItems WHERE ItemId = ?";
 
-        try (Connection con = dataSource.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(sql)) {
-
+        try {
+            con = dataSource.getConnection();
+            String query = "SELECT * FROM FoodItems WHERE ItemId = ?";
+            pstmt = con.prepareStatement(query);
             pstmt.setInt(1, id);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    foodItem = new FoodItemDTO();
-                    foodItem.setItemId(rs.getInt("ItemId"));
-                    foodItem.setName(rs.getString("Name"));
-                    foodItem.setQuantity(rs.getInt("Quantity"));
-                    foodItem.setExpirationDate(rs.getDate("ExpirationDate"));
-                    foodItem.setPrice(rs.getDouble("Price"));
-                    foodItem.setDiscountRate(rs.getDouble("DiscountRate"));
-                    foodItem.setForDonation(rs.getBoolean("IsForDonation"));
-                    foodItem.setUserId(rs.getInt("UserId"));
-                }
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                foodItem = new FoodItemDTO();
+                foodItem.setItemId(rs.getInt("ItemId"));
+                foodItem.setName(rs.getString("Name"));
+                foodItem.setQuantity(rs.getInt("Quantity"));
+                foodItem.setExpirationDate(rs.getDate("ExpirationDate"));
+                foodItem.setPrice(rs.getDouble("Price"));
+                foodItem.setDiscountRate(rs.getDouble("DiscountRate"));
+                foodItem.setForDonation(rs.getBoolean("IsForDonation"));
+                foodItem.setUserId(rs.getInt("UserId"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return foodItem;
     }
 
     @Override
     public void addFoodItem(FoodItemDTO foodItem) {
-        String sql = "INSERT INTO FoodItems (Name, Quantity, ExpirationDate, Price, DiscountRate, IsForDonation, UserId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        Connection con = null;
+        PreparedStatement pstmt = null;
 
-        try (Connection con = dataSource.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(sql)) {
-
+        try {
+            con = dataSource.getConnection();
+            String sql = "INSERT INTO FoodItems (Name, Quantity, ExpirationDate, Price, DiscountRate, IsForDonation, UserId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            pstmt = con.prepareStatement(sql);
             pstmt.setString(1, foodItem.getName());
             pstmt.setInt(2, foodItem.getQuantity());
             pstmt.setDate(3, new java.sql.Date(foodItem.getExpirationDate().getTime()));
@@ -89,16 +126,29 @@ public class FoodItemDAOImpl implements FoodItemDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
     @Override
     public void updateFoodItem(FoodItemDTO foodItem) {
-        String sql = "UPDATE FoodItems SET Name = ?, Quantity = ?, ExpirationDate = ?, Price = ?, DiscountRate = ?, IsForDonation = ?, UserId = ? WHERE ItemId = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
 
-        try (Connection con = dataSource.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(sql)) {
-
+        try {
+            con = dataSource.getConnection();
+            String sql = "UPDATE FoodItems SET Name = ?, Quantity = ?, ExpirationDate = ?, Price = ?, DiscountRate = ?, IsForDonation = ?, UserId = ? WHERE ItemId = ?";
+            pstmt = con.prepareStatement(sql);
             pstmt.setString(1, foodItem.getName());
             pstmt.setInt(2, foodItem.getQuantity());
             pstmt.setDate(3, new java.sql.Date(foodItem.getExpirationDate().getTime()));
@@ -110,20 +160,44 @@ public class FoodItemDAOImpl implements FoodItemDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
     @Override
     public void deleteFoodItem(FoodItemDTO foodItem) {
-        String sql = "DELETE FROM FoodItems WHERE ItemId = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
 
-        try (Connection con = dataSource.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(sql)) {
-
+        try {
+            con = dataSource.getConnection();
+            String sql = "DELETE FROM FoodItems WHERE ItemId = ?";
+            pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, foodItem.getItemId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 }
