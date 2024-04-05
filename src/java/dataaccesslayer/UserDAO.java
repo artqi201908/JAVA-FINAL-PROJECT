@@ -4,9 +4,8 @@
  */
 package dataaccesslayer;
 
-import java.sql.SQLException;
 import java.util.List;
-import transferobject.UserDTO;
+
 
 /**
  *
@@ -14,6 +13,7 @@ import transferobject.UserDTO;
  */
 public interface UserDAO {
     List<UserDTO> getAllUsers();
+    
 
     UserDTO getUserByUserName(String name);
 
