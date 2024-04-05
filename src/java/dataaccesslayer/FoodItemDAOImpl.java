@@ -1,4 +1,4 @@
-package java.dataaccesslayer;
+package dataaccesslayer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,15 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.sql.DataSource;
 import java.transferobject.FoodItemDTO;
 
 public class FoodItemDAOImpl implements FoodItemDAO {
 
-    private final DataSource dataSource;
 
-    public FoodItemDAOImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public FoodItemDAOImpl() {
     }
 
     @Override
@@ -25,7 +22,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
         List<FoodItemDTO> foodItems = new ArrayList<>();
 
         try {
-            con = dataSource.getConnection();
+            con = dataaccesslayer.DataSource.getConnection();
             String query = "SELECT * FROM FoodItems";
             pstmt = con.prepareStatement(query);
             rs = pstmt.executeQuery();
@@ -70,7 +67,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
         FoodItemDTO foodItem = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSource.getConnection();
             String query = "SELECT * FROM FoodItems WHERE ItemId = ?";
             pstmt = con.prepareStatement(query);
             pstmt.setInt(1, id);
@@ -113,7 +110,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
         PreparedStatement pstmt = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSource.getConnection();
             String sql = "INSERT INTO FoodItems (Name, Quantity, ExpirationDate, Price, DiscountRate, IsForDonation, UserId) VALUES (?, ?, ?, ?, ?, ?, ?)";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, foodItem.getName());
@@ -146,7 +143,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
         PreparedStatement pstmt = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSource.getConnection();
             String sql = "UPDATE FoodItems SET Name = ?, Quantity = ?, ExpirationDate = ?, Price = ?, DiscountRate = ?, IsForDonation = ?, UserId = ? WHERE ItemId = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, foodItem.getName());
@@ -180,7 +177,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
         PreparedStatement pstmt = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSource.getConnection();
             String sql = "DELETE FROM FoodItems WHERE ItemId = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, foodItem.getItemId());

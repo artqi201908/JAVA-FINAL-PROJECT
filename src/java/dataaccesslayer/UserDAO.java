@@ -23,7 +23,7 @@ public interface UserDAO {
 
     void deleteUser(UserDTO user);
     
-    public boolean validate(String username, String password);
+    public Integer validate(String username, String password);
     
     public boolean emailExists(String email);
 }

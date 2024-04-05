@@ -1,4 +1,4 @@
-package java.dataaccesslayer;
+package dataaccesslayer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

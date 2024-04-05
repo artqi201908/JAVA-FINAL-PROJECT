@@ -71,7 +71,6 @@ public class RegisterServlet extends HttpServlet {
         // Attempt to add user
         UserBusinessLogic userLogic = new UserBusinessLogic();
         boolean isRegistered = userLogic.addUser(user);
-
         if (isRegistered) {
             response.sendRedirect("login.jsp");
         } else {

@@ -25,7 +25,7 @@ public class UserBusinessLogic {
         return usersDao.getAllUsers();
     }
 
-    public boolean validateCredentials(String username, String password) {
+    public Integer validateCredentials(String username, String password) {
         return usersDao.validate(username, password);
     }
 

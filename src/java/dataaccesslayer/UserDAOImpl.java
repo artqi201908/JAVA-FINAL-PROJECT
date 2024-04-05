@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package dataaccesslayer;
 
 import dataaccesslayer.UserDAO;
@@ -19,8 +18,10 @@ import transferobject.UserDTO;
  * @author phron
  */
 public class UserDAOImpl implements UserDAO {
-    public UserDAOImpl(){}
-    
+
+    public UserDAOImpl() {
+    }
+
     @Override
     public List<UserDTO> getAllUsers() {
         Connection con = null;
@@ -43,7 +44,7 @@ public class UserDAOImpl implements UserDAO {
 
                 String name = rs.getString("Name");
                 user.setName(name);
-                
+
                 user.setEmail(rs.getString("Email"));
                 user.setUserType(rs.getInt("Usertype"));
                 users.add(user);
@@ -52,22 +53,23 @@ public class UserDAOImpl implements UserDAO {
             e.printStackTrace();
         } finally {
             try {
-               if (rs != null) {
-                   rs.close();
-               }
+                if (rs != null) {
+                    rs.close();
+                }
 
-               if (pstmt != null) {
-                   pstmt.close();
-               }
-               if (con != null) {
-                   con.close();
-               }
-         } catch (SQLException ex) {
-               System.out.println(ex.getMessage());
-           }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return users;
     }
+
     @Override
     public UserDTO getUserByUserName(String name) {
         Connection con = null;
@@ -85,7 +87,7 @@ public class UserDAOImpl implements UserDAO {
                 int userId = rs.getInt("UserID");
                 String userName = rs.getString("Name");
                 String email = rs.getString("Email");
-                int role =rs.getInt("UserType");
+                int role = rs.getInt("UserType");
 
                 user.setUserID(userId);
                 user.setName(userName);
@@ -121,7 +123,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         boolean success = false;
-        
+
         try {
             connection = DataSource.getConnection();
             preparedStatement = connection.prepareStatement("INSERT INTO Users (Email, Name, Password, UserType) VALUES (?, ?, ?, ?)");
@@ -129,14 +131,14 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setInt(4, user.getUserType());
-             
+
             int rowsAffected = preparedStatement.executeUpdate();
             success = rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return success;
-	}
+    }
 
     @Override
     public void updateUser(UserDTO user) {
@@ -197,74 +199,57 @@ public class UserDAOImpl implements UserDAO {
 //            }
         }
     }
+
     @Override
-     public boolean validate(String username, String password) {
+    public Integer validate(String username, String password) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        boolean userExists = false;
+        try {
+            con = DataSource.getConnection();
+            pstmt = con.prepareStatement("SELECT UserID FROM Users WHERE Username = ? AND Password = ?");
+            pstmt.setString(1, username);
+            pstmt.setString(2, password); // Consider using hashed passwords
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("UserID"); // Return the user ID
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log or handle the exception appropriately
+        }
+        return null;
+    }
+
+    @Override
+    public boolean emailExists(String email) {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        boolean userExists = false;
-    try {
-        con = DataSource.getConnection();
-        String query = "SELECT COUNT(*) FROM Users WHERE Username = ? AND Password = ?";
-        pstmt = con.prepareStatement(query);
-        
-        pstmt.setString(1, username);
-        pstmt.setString(2, password);
-
-        rs = pstmt.executeQuery();
-
-        if (rs.next() && rs.getInt(1) > 0) {
-            userExists = true;
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
-        // Ensure resources are closed in finally block to avoid resource leaks
         try {
-            if (rs != null) {
-                rs.close();
+            con = DataSource.getConnection();
+            pstmt = con.prepareStatement("SELECT Email FROM Users WHERE Email = ?");
+            pstmt.setString(1, email);
+            rs = pstmt.executeQuery();
+            return rs.next(); // If there's at least one row, the email exists
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+            close(con);
+        }
+        return false;
+    }
+
+    private void close(AutoCloseable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (Exception e) {
+                // Log the exception or handle it
+                System.out.println("Failed to close resource: " + e.getMessage());
             }
-            if (pstmt != null) {
-                pstmt.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
     }
-    return userExists;
-     }
-     
-     @Override
-    public boolean emailExists(String email) {
-    Connection con = null;
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-        con = DataSource.getConnection();
-        pstmt = con.prepareStatement("SELECT Email FROM Users WHERE Email = ?");
-        pstmt.setString(1, email);
-        rs = pstmt.executeQuery();
-        return rs.next(); // If there's at least one row, the email exists
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
-        close(rs);
-        close(pstmt);
-        close(con);
-    }
-    return false;
-}
-     private void close(AutoCloseable closeable) {
-    if (closeable != null) {
-        try {
-            closeable.close();
-        } catch (Exception e) {
-            // Log the exception or handle it
-            System.out.println("Failed to close resource: " + e.getMessage());
-        }
-    }
-}
 }

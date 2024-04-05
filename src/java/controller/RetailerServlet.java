@@ -4,23 +4,24 @@
  */
 package controller;
 
-import businesslayer.UserBusinessLogic;
+import businesslayer.FoodItemBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.transferobject.FoodItemDTO;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transferobject.UserDTO;
+import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 /**
  *
  * @author phron
  */
-public class LoginServlet extends HttpServlet {
+public class RetailerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +40,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
+            out.println("<title>Servlet RetailerServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RetailerServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,18 +61,27 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserBusinessLogic authorBusinessLogic = new UserBusinessLogic();
-        List<UserDTO> users = null;
+        // Retrieve the user ID from the session
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
 
+        FoodItemBusinessLogic inventoryBL = new FoodItemBusinessLogic();
+
+        // Assuming you have a method that fetches inventory based on user ID
+        List<FoodItemDTO> foodList=null;
         try {
-            users = authorBusinessLogic.getAllUsers();
-        } catch (SQLException ex) {
+            foodList = inventoryBL.getAllInventory(userId);
+        } catch (SQLExceptionList ex) {
             log(ex.getMessage());
         }
 
-        request.setAttribute("authors", users);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/login.jsp");
-        dispatcher.forward(request, response);
+        System.out.println("Size of foodList: " + foodList.size());
+
+        // Set the foodList attribute in the request scope
+        request.setAttribute("foodList", foodList);
+
+        // Forward the request to the Retailer.jsp page to display inventory
+        request.getRequestDispatcher("Retailer.jsp").forward(request, response);
+
     }
 
     /**
@@ -85,23 +95,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Retrieve username and password from the request
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        // Instantiate your business logic class
-        UserBusinessLogic userBL = new UserBusinessLogic();
-
-        Integer userId = userBL.validateCredentials(username, password);
-
-        if (userId != null && userId > 0) {
-            request.getSession().setAttribute("userId", userId);
-            request.getRequestDispatcher("/Retailer.jsp").forward(request, response);
-        } else {
-            // If not valid, set an error message and forward back to the login page
-            request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
