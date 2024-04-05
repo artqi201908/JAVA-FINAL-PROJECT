@@ -4,6 +4,8 @@
     Author     : phron
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="transferobject.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,6 +26,9 @@
                         <th><input type="submit" value="Login">
                     <input type="reset" value="Reset"></th>
                     </table>
-        </form></center>
+ 
+        </form>
+        <a href="register.jsp" class="register-button">Register</a>
+    </center>
     </body>
 </html>

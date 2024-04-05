@@ -2,6 +2,7 @@ package dataaccesslayer;
 
 import transferobject.SubscriptionDTO;
 import java.util.List;
+import transferobject.SubscriptionDTO;
 
 public interface SubscriptionsDAO {
     List<SubscriptionDTO> getAllSubscriptions();

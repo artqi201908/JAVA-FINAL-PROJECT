@@ -20,44 +20,28 @@ import java.util.Properties;
 public class DataSource {
 
     private static Connection connection = null;
+    private static String url = "jdbc:mysql://localhost:3306/finalproject?useSSL=false&allowPublicKeyRetrieval=true";
+    private static String username = "root";
+    private static String password = "Mklahoilmj@1";
 
-    private DataSource() {
+    public DataSource() {
     }
 
-    /* Only use one connection for this application, prevent memory leaks. */
-    public static Connection getConnection() {
-        String[] connectionInfo = openPropsFile();
-
+    /*
+ * Only use one connection for this application, prevent memory leaks.
+     */
+    public static Connection getConnection() throws SQLException {
         try {
-            if (connection == null) {
-                connection = DriverManager.getConnection(connectionInfo[0], connectionInfo[1], connectionInfo[2]);
+            if (connection != null) {
+                System.out.println("Cannot create new connection, one exists already");
             } else {
-                System.out.println("Cannot create new connection, using existing one");
+                connection = DriverManager.getConnection(url, username, password);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+            throw ex;
         }
         return connection;
     }
-
-    private static String[] openPropsFile() {
-        Properties props = new Properties();
-
-        try (InputStream in = DataSource.class.getClassLoader().getResourceAsStream("database.properties")) {
-            props.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String connectionString = props.getProperty("jdbc.url");
-        String username = props.getProperty("jdbc.username");
-        String password = props.getProperty("jdbc.password");
-
-        String[] info = new String[3];
-        info[0] = connectionString;
-        info[1] = username;
-        info[2] = password;
-
-        return info;
-    }
 }
+
