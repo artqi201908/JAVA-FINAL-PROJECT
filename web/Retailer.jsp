@@ -21,6 +21,7 @@
     <a href="register.jsp">Register</a>
     <a href="login.jsp">Login</a>
     <a href="logout.jsp">Logout</a>
+    <a href="addfood.jsp"> Add Inventory</a>
 </div>
 
 <div class="content">
