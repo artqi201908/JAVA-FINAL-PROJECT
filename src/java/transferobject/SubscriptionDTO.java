@@ -1,4 +1,4 @@
-package java.transferobject;
+package transferobject;
 
 public class SubscriptionDTO {
     private int subscriptionId;

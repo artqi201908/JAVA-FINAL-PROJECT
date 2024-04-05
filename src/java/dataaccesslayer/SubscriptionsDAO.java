@@ -1,6 +1,6 @@
-package java.dataaccesslayer;
+package dataaccesslayer;
 
-import java.transferobject.SubscriptionDTO;
+import transferobject.SubscriptionDTO;
 import java.util.List;
 
 public interface SubscriptionsDAO {
