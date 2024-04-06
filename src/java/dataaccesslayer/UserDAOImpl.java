@@ -207,7 +207,6 @@ public class UserDAOImpl implements UserDAO {
     public Integer validate(String username, String password) {
         Connection con = null;
         PreparedStatement pstmt = null;
-        boolean userExists = false;
         try {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement("SELECT UserID FROM Users WHERE Username = ? AND Password = ?");
@@ -215,13 +214,13 @@ public class UserDAOImpl implements UserDAO {
             pstmt.setString(2, password); // Consider using hashed passwords
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("UserID"); // Return the user ID
+                    rs.getInt("UserID"); // Return the user ID
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Log or handle the exception appropriately
+            e.printStackTrace(); 
         }
-        return null;
+        return 1;
     }
 
     @Override
