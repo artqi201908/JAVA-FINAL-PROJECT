@@ -1,4 +1,4 @@
-package java.transferobject;
+package transferobject;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,6 +13,9 @@ public class FoodItemDTO {
     private BigDecimal discountRate;
     private boolean isForDonation;
     private int userId;
+    // can consider adding some additional attributes, such as classification information, food description, etc.
+    private String category; // food category
+    private String description; // food description
 
 
     public FoodItemDTO() {
@@ -80,7 +83,22 @@ public class FoodItemDTO {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+    //Getters and Setters
+    public String getCategory() {
+        return category;
+    }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
 }

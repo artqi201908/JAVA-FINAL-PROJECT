@@ -1,6 +1,6 @@
 package dataaccesslayer;
 
-import java.transferobject.FoodWasteTrackerDTO;
+import transferobject.FoodWasteTrackerDTO;
 import java.util.List;
 
 public interface FoodWasteTrackerDAO {
