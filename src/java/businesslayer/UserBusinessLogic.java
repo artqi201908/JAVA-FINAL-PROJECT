@@ -7,9 +7,9 @@ package businesslayer;
 
 
 import java.sql.SQLException;
-
 import java.util.List;
 import transferobject.UserDTO;
+import dataaccesslayer.*;
 
 
 /**
@@ -18,7 +18,7 @@ import transferobject.UserDTO;
  */
 public class UserBusinessLogic {
 
-    //private UserDAOImpl usersDao = null;
+    private UserDAO usersDao=null;
 
     public UserBusinessLogic() {
         usersDao = new UserDAOImpl();
