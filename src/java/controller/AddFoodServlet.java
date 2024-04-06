@@ -7,7 +7,6 @@ package controller;
 import businesslayer.FoodItemBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -72,42 +71,46 @@ public class AddFoodServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer userId = (Integer) request.getSession().getAttribute("userId");
-        if (userId == null) {
-            response.sendRedirect("login.jsp");
-            return;
+        try {
+            // Extract and convert form parameters
+            String name = request.getParameter("name");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            double price = Double.parseDouble(request.getParameter("price"));
+            java.sql.Date expirationDate = java.sql.Date.valueOf(request.getParameter("expirationDate"));
+            double discountRate = Double.parseDouble(request.getParameter("discountRate"));
+            boolean isForDonation = request.getParameter("isForDonation") != null;
+
+            // Retrieve user ID from session (ensure user is logged in and has a valid session)
+            Integer userId = (Integer) request.getSession().getAttribute("userId");
+            if (userId == null) {
+                // Handle not logged in state, e.g., redirect to login page
+                response.sendRedirect("login.jsp");
+                return;
+            }
+
+            // Create and populate FoodItemDTO object
+            FoodItemDTO foodItem = new FoodItemDTO();
+            foodItem.setName(name);
+            foodItem.setQuantity(quantity);
+            foodItem.setPrice(price);
+            foodItem.setExpirationDate(expirationDate);
+            foodItem.setDiscountRate(discountRate);
+            foodItem.setForDonation(isForDonation);
+            foodItem.setUserId(userId); // Set the user ID
+
+            // Use business logic to add the food item
+            FoodItemBusinessLogic foodBL = new FoodItemBusinessLogic();
+            foodBL.addFoodItem(foodItem);
+
+            // Redirect or forward after successful addition
+            response.sendRedirect("allfood.jsp"); // Adjust redirect as needed
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Optionally, set an error message and forward/redirect to an error page or form page
+            request.setAttribute("errorMessage", "Failed to add food item.");
+            request.getRequestDispatcher("addfood.jsp").forward(request, response);
         }
-
-        String name = request.getParameter("name");
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        double price = Double.parseDouble(request.getParameter("price"));
-        Date expirationDate = Date.valueOf(request.getParameter("expirationDate"));
-        double discountRate = Double.parseDouble(request.getParameter("discountRate"));
-
-        // Create FoodItemDTO object and set its properties
-        FoodItemDTO foodItem = new FoodItemDTO();
-        foodItem.setName(name);
-        foodItem.setQuantity(quantity);
-        foodItem.setPrice(price);
-        foodItem.setExpirationDate(expirationDate);
-        foodItem.setDiscountRate(discountRate);
-        foodItem.setUserId(userId); // Assume FoodItemDTO has a field for userId
-
-        // Save foodItem using your business logic layer
-        FoodItemBusinessLogic inventoryBL = new FoodItemBusinessLogic();
-        inventoryBL.addFoodItem(foodItem);
-
-        response.sendRedirect("inventory.jsp"); // Adjust as needed
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
+
+
