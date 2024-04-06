@@ -11,13 +11,14 @@ import java.sql.SQLException;
 import java.util.List;
 import transferobject.UserDTO;
 
+
 /**
  *
  * @author phron
  */
 public class UserBusinessLogic {
 
-    private UserDAOImpl usersDao = null;
+    //private UserDAOImpl usersDao = null;
 
     public UserBusinessLogic() {
         usersDao = new UserDAOImpl();
