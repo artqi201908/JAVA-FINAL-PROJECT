@@ -5,6 +5,7 @@
 package dataaccesslayer;
 
 import java.util.List;
+import transferobject.UserDTO;
 
 
 /**
@@ -14,7 +15,6 @@ import java.util.List;
 public interface UserDAO {
     List<UserDTO> getAllUsers();
     
-
     UserDTO getUserByUserName(String name);
 
     boolean addUser(UserDTO User);

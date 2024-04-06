@@ -5,11 +5,11 @@
 package businesslayer;
 
 
-import java.dataaccesslayer.UserDAOImpl;
-import java.sql.SQLException;
-import java.transferobject.UserDTO;
-import java.util.List;
 
+import java.sql.SQLException;
+
+import java.util.List;
+import transferobject.UserDTO;
 
 /**
  *
