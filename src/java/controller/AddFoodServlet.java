@@ -7,12 +7,12 @@ package controller;
 import businesslayer.FoodItemBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.transferobject.FoodItemDTO;
 import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transferobject.FoodItemDTO;
 
 /**
  *
