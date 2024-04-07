@@ -16,7 +16,7 @@
     
     
     <body>
-    <h2>Registration Form</h2>
+   
     
     <form action="RegisterServlet" method="post">
     

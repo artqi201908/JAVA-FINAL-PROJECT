@@ -12,23 +12,28 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
+        <link rel="stylesheet" href="registration.css">
     </head>
     <body>
-    <center><form action="LoginServlet" method="post">
-                    <table>
-                        <tr>
-                            <th>UserName:</th><th><input type="text" name="username"</th>
-                        </tr>
-                        <tr>
-                            <th>Password:</th><th><input type="password" name="password"</th>
-                        </tr>
-                        <th></th>
-                        <th><input type="submit" value="Login">
-                    <input type="reset" value="Reset"></th>
-                    </table>
+    <center>
+        <form action="LoginServlet" method="post">
+                   <div class="textfield">
+                <label for="email">Email Address</label>
+                <input type="text" name="email" id="email" placeholder="Email">
+                <span class="error" id="emailError">Email address should be non-empty</span>
+            </div>
+
+            <div class="textfield">
+                <label for="pass">Password</label>
+                <input type="password" name="pass" id="pass" placeholder="Password">
+                <span class="error" id="passError">Password should be non-empty</span>
+            </div>
+
+            <button type="submit">Sign In</button>
  
         </form>
-        <a href="register.jsp" class="register-button">Register</a>
+        <p>Don't have an account? Sign up <a href="register.jsp">here</a></p>
+       
     </center>
     </body>
 </html>
