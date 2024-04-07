@@ -14,6 +14,7 @@ public class User {
     private String password;
     private int userType;
 
+    
     public User() {
     }
 

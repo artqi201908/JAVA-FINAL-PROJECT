@@ -16,8 +16,6 @@ public class Item {
     private int quantity;
     private Date expirationDate;
 
-
-
     private double price;
     private double discountRate;
     private boolean isForDonation;
