@@ -4,7 +4,8 @@
     Author     : phron
 --%>
 
-<%@page import="java.transferobject.FoodItemDTO"%>
+<%@page import="transferobject.FoodItemDTO"%>
+<%@page import="transferobject.FoodItemDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Your Application's Title</title>
-    <link rel="stylesheet" href="Retailer.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
