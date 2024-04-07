@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Consumer Page</title>
-        <link rel="stylesheet" href="Retailer.css">
+        <link rel="stylesheet" href="style.css">
         
     </head>
     

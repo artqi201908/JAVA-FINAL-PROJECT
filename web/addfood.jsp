@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Food Item</title>
-    <link rel="stylesheet" href="Retailer.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="sidebar">
