@@ -28,7 +28,7 @@
         <tr>
             <th>Food Name</th>
             <th>Quantity</th>
-            <th>Price</th> <!-- Assuming you wanted Price here -->
+            <th>Price</th> 
             <th>Expiration Date</th>
             <th>Discount Rate</th>
         </tr>
@@ -40,7 +40,7 @@
                 <tr>
                     <td><%= food.getName() %></td>
                     <td><%= food.getQuantity() %></td>
-                    <td><%= food.getPrice() %></td> <!-- Corrected from getExpirationDate() -->
+                    <td><%= food.getPrice() %></td> 
                     <td><%= food.getExpirationDate() %></td>
                     <td><%= food.getDiscountRate() %></td>
                 </tr>
