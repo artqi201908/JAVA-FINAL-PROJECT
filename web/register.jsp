@@ -68,9 +68,10 @@
 
             <button type="submit">Sign Up</button>
             <button type="reset">Reset</button>
-        
+        <p>Already a user? Sign in <a href="login.jsp">here</a></p>
         
     </form>
+        
     
         
 

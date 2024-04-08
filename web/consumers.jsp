@@ -18,9 +18,10 @@
     
     <body>
         <div class="sidebar">
+            <img src="pics/logo.jpg" alt="Your Logo" class="sidebar-logo">
     <a href="index.jsp">Home</a> 
     <a href="allfood.jsp">All Food</a>
-    <a href="logout.jsp">Logout</a>
+     <a href="LogoutServlet">Logout</a>
 </div>
         <div class="content">
     <h2>All Food</h2>
