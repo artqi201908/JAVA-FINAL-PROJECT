@@ -31,7 +31,7 @@ body, html {
     transition: 0.3s;
 }
 .sidebar a:hover {
-    background-color: #575757;
+   background-color: rgb(43, 43, 87);
 }
 .content {
     margin-left: 200px;
