@@ -1,16 +1,23 @@
 
 import java.sql.Timestamp;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 
-public class TransactionDTO {
+/**
+ *
+ * @author Shao Tang
+ */
+public class Transaction {
     private int transactionId;
     private int itemId;
     private int userId;
     private String transactionType;
     private Timestamp transactionDate;
 
-    public TransactionDTO() {
-    }
+   
 
     public int getTransactionId() {
         return transactionId;
@@ -51,8 +58,4 @@ public class TransactionDTO {
     public void setTransactionDate(Timestamp transactionDate) {
         this.transactionDate = transactionDate;
     }
-
-
-
-
 }
