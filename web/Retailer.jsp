@@ -18,11 +18,12 @@
 <body>
 
 <div class="sidebar">
+    <img src="pics/logo.jpg" alt="Your Logo" class="sidebar-logo">
     <a href="index.jsp">Home</a> <!-- Assuming you have a home page -->
-    <a href="register.jsp">Register</a>
-    <a href="login.jsp">Login</a>
-    <a href="logout.jsp">Logout</a>
+    <a href="allfood.jsp">All Food</a>
     <a href="addfood.jsp"> Add Inventory</a>
+    <a href="LogoutServlet">Logout</a>
+    
 </div>
 
 <div class="content">

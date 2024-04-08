@@ -37,6 +37,16 @@ body, html {
     margin-left: 200px;
     padding: 20px;
 }
+
+.sidebar-logo {
+    display: block; /* 将图片作为块级元素显示 */
+    margin: 0 auto; /* 上下边距为 0，左右边距自动，实现水平居中 */
+    max-width: 100%; /* 确保图片不会超出侧边栏的宽度 */
+    height: auto; /* 保持图片的原始纵横比 */
+}
+
+
+
 h2 {
     color: #333;
 }
