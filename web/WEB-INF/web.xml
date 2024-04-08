@@ -41,7 +41,7 @@
     </session-config>
     <welcome-file-list>
         
-        <welcome-file></welcome-file>
+        <welcome-file>charity.jsp</welcome-file>
         <welcome-file>Retailer.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
