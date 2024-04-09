@@ -8,13 +8,13 @@
  * @author Shao Tang
  */
 public class User {
+
     private int userID;
     private String name;
     private String email;
     private String password;
     private int userType;
 
-    
     public User() {
     }
 
@@ -25,7 +25,7 @@ public class User {
     public void setUserID(int userId) {
         this.userID = userId;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -56,5 +56,5 @@ public class User {
 
     public void setUserType(int userType) {
         this.userType = userType;
-    }  
+    }
 }

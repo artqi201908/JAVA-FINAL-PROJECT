@@ -4,6 +4,7 @@ import transferobject.FoodWasteTrackerDTO;
 import java.util.List;
 
 public interface FoodWasteTrackerDAO {
+
     List<FoodWasteTrackerDTO> getAllWasteRecords();
 
     FoodWasteTrackerDTO getWasteRecordById(int recordId);

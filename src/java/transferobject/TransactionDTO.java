@@ -1,8 +1,9 @@
 package java.transferobject;
+
 import java.sql.Timestamp;
 
-
 public class TransactionDTO {
+
     private int transactionId;
     private int itemId;
     private int userId;
@@ -51,8 +52,5 @@ public class TransactionDTO {
     public void setTransactionDate(Timestamp transactionDate) {
         this.transactionDate = transactionDate;
     }
-
-
-
 
 }

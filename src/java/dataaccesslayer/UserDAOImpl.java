@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
         ArrayList<UserDTO> users = null;
 
         try {
-            con = DataSource.getConnection();
+            con = DataSource.getInstance().getConnection(); 
 
             String query = "SELECT * FROM Users ORDER BY UserID";
             pstmt = con.prepareStatement(query);
@@ -71,39 +71,40 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Integer getUserTypeByUserID(int userID) {
-        Integer userType = null;
-        String sql = "SELECT Usertype FROM Users WHERE UserID=?";
+        int userType = 0;
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {con = DataSource.getInstance().getConnection(); 
+                preparedStatement = con.prepareStatement("SELECT * FROM User WHERE Name = ?");
+	            preparedStatement.setInt(1, userID);
+	            resultSet = preparedStatement.executeQuery();
+	            if (resultSet.next()) {
+	                userType = resultSet.getInt("UserType");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            // Close connections and resources
+	            // Handle exceptions if necessary
+	        }
 
-        try (Connection con = DataSource.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
-
-            pstmt.setInt(1, userID);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    userType = rs.getInt("Usertype");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Log and handle appropriately in real applications
-        }
-
-        return userType;
-    }
+	        return userType;
+	    }
 
     @Override
     public boolean addUser(UserDTO user) {
-        Connection connection = null;
+        Connection con = null;
         PreparedStatement preparedStatement = null;
         boolean success = false;
 
         try {
-            connection = DataSource.getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO Users (Email, Name, Password, UserType) VALUES (?, ?, ?, ?)");
+            con = DataSource.getInstance().getConnection(); 
+            preparedStatement = con.prepareStatement("INSERT INTO Users (Email, Name, Password, UserType) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setInt(4, user.getUserType());
-
             int rowsAffected = preparedStatement.executeUpdate();
             success = rowsAffected > 0;
         } catch (SQLException e) {
@@ -118,7 +119,7 @@ public class UserDAOImpl implements UserDAO {
         PreparedStatement pstmt = null;
 
         try {
-            con = DataSource.getConnection();
+            con = DataSource.getInstance().getConnection(); 
             pstmt = con.prepareStatement(
                     "UPDATE Users SET Name = ?, "
                     + "Email = ?, Password=?, UserType=? WHERE UserID = ?");
@@ -150,7 +151,7 @@ public class UserDAOImpl implements UserDAO {
         PreparedStatement pstmt = null;
 
         try {
-            con = DataSource.getConnection();
+            con = DataSource.getInstance().getConnection(); 
             pstmt = con.prepareStatement(
                     "DELETE FROM Users WHERE UserID = ?");
             pstmt.setInt(1, user.getUserID());
@@ -174,13 +175,13 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Integer validate(String username, String password) {
-        int id=0;
-        try (Connection con = DataSource.getConnection(); PreparedStatement pstmt = con.prepareStatement("SELECT UserID FROM Users WHERE Name = ? AND Password = ?")) {
+        int id = 0;
+        try (Connection con = DataSource.getInstance().getConnection();  PreparedStatement pstmt = con.prepareStatement("SELECT UserID FROM Users WHERE Name = ? AND Password = ?")) {
             pstmt.setString(1, username);
             pstmt.setString(2, password); // Consider using hashed passwords
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    id= rs.getInt("UserID"); // Return the user ID
+                    id = rs.getInt("UserID"); // Return the user ID
                 }
             }
         } catch (SQLException e) {
@@ -189,35 +190,5 @@ public class UserDAOImpl implements UserDAO {
         return id; // Return null or a negative value if credentials are invalid
     }
 
-    @Override
-    public boolean emailExists(String email) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            con = DataSource.getConnection();
-            pstmt = con.prepareStatement("SELECT Email FROM Users WHERE Email = ?");
-            pstmt.setString(1, email);
-            rs = pstmt.executeQuery();
-            return rs.next(); // If there's at least one row, the email exists
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rs);
-            close(pstmt);
-            close(con);
-        }
-        return false;
-    }
-
-    private void close(AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (Exception e) {
-                // Log the exception or handle it
-                System.out.println("Failed to close resource: " + e.getMessage());
-            }
-        }
-    }
+    
 }

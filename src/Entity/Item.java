@@ -5,12 +5,12 @@ import java.util.Date;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Shao Tang
  */
 public class Item {
+
     private int itemId;
     private String name;
     private int quantity;
@@ -20,7 +20,6 @@ public class Item {
     private double discountRate;
     private boolean isForDonation;
     private int userId;
-
 
     public Item() {
     }
@@ -32,7 +31,6 @@ public class Item {
     public void setItemId(int itemId) {
         this.itemId = itemId;
     }
-
 
     public String getName() {
         return name;
@@ -58,7 +56,6 @@ public class Item {
         this.expirationDate = expirationDate;
     }
 
-
     public double getPrice() {
         return price;
     }
@@ -75,7 +72,6 @@ public class Item {
         this.discountRate = discountRate;
     }
 
-
     public boolean isForDonation() {
         return isForDonation;
     }
@@ -91,6 +87,5 @@ public class Item {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
 
 }

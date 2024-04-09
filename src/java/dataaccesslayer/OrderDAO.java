@@ -4,6 +4,7 @@ import java.transferobject.OrderDTO;
 import java.util.List;
 
 public interface OrderDAO {
+
     List<OrderDTO> getAllOrders();
 
     OrderDTO getOrderByOrderId(String Id);

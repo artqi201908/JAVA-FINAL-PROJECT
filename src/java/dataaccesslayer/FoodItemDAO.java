@@ -1,6 +1,5 @@
 package dataaccesslayer;
 
-
 import transferobject.FoodItemDTO;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import java.util.List;
  * Interface for Data Access Object for FoodItems table.
  */
 public interface FoodItemDAO {
+
     List<FoodItemDTO> getAllFoodItems();
 
     FoodItemDTO getFoodItemById(int id);

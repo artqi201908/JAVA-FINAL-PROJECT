@@ -8,12 +8,12 @@
  * @author Shao Tang
  */
 public class Order {
+
     private int id;
     private int itemId;
     private double quantity;
     private String address;
 
-    
     public int getId() {
         return id;
     }

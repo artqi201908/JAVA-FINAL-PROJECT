@@ -1,6 +1,7 @@
 package java.transferobject;
 
 public class OrderDTO {
+
     private int id;
     private int itemId;
     private double quantity;

@@ -26,14 +26,14 @@ public class UserBusinessLogic {
     }
 
     public Integer validateCredentialsAndGetUserId(String username, String password) {
-    return usersDao.validate(username, password);
-}
+        return usersDao.validate(username, password);
+    }
 
     public boolean addUser(UserDTO user) {
         return usersDao.addUser(user);
     }
 
-    public Integer getUserTypeByUserID(int id) {
-        return usersDao.getUserTypeByUserID(id);
+    public Integer getUserTypeByUsername(int userid) {
+        return usersDao.getUserTypeByUserID(userid);
     }
 }

@@ -1,6 +1,7 @@
 package transferobject;
 
 public class SubscriptionDTO {
+
     private int subscriptionId;
     private int userId;
     private String location;
@@ -8,7 +9,6 @@ public class SubscriptionDTO {
 
     public SubscriptionDTO() {
     }
-
 
     public int getSubscriptionId() {
         return subscriptionId;
@@ -41,7 +41,5 @@ public class SubscriptionDTO {
     public void setCommunicationMethod(String communicationMethod) {
         this.communicationMethod = communicationMethod;
     }
-
-
 
 }

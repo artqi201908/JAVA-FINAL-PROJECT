@@ -67,7 +67,7 @@ public class RetailerServlet extends HttpServlet {
         FoodItemBusinessLogic inventoryBL = new FoodItemBusinessLogic();
 
         // Assuming you have a method that fetches inventory based on user ID
-        List<FoodItemDTO> foodList=null;
+        List<FoodItemDTO> foodList = null;
         try {
             foodList = inventoryBL.getAllInventory(userId);
         } catch (SQLExceptionList ex) {

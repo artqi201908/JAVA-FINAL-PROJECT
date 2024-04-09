@@ -11,14 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author Shao Tang
  */
 public class ConsumerServlet extends HttpServlet {
-    
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,14 +25,9 @@ public class ConsumerServlet extends HttpServlet {
             int itemId = Integer.parseInt(request.getParameter("itemId"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-          
-            ConsumerBusinessLogic consumerBusinessLogic = new ConsumerBusinessLogic();
-                    consumerBusinessLogic.purchaseItem(userId, itemId, quantity);
-
-
             response.sendRedirect(request.getContextPath() + "/purchaseSuccess.jsp");
         } catch (NumberFormatException e) {
-        
+
             request.setAttribute("error", "Invalid input format.");
             request.getRequestDispatcher("/purchaseError.jsp").forward(request, response);
         } catch (Exception e) {

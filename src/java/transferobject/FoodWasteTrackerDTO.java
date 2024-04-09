@@ -3,6 +3,7 @@ package transferobject;
 import java.util.Date;
 
 public class FoodWasteTrackerDTO {
+
     private int wasteId;
     private int itemId;
     private int wastedQuantity;
@@ -42,7 +43,5 @@ public class FoodWasteTrackerDTO {
     public void setDateReported(Date dateReported) {
         this.dateReported = dateReported;
     }
-
-
 
 }

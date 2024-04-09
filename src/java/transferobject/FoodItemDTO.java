@@ -1,24 +1,17 @@
 package transferobject;
 
-
 import java.util.Date;
 
-
 public class FoodItemDTO {
-
 
     private int itemId;
     private String name;
     private int quantity;
     private Date expirationDate;
-
-
-
     private double price;
     private double discountRate;
     private boolean isForDonation;
     private int userId;
-
 
     public FoodItemDTO() {
     }
@@ -30,7 +23,6 @@ public class FoodItemDTO {
     public void setItemId(int itemId) {
         this.itemId = itemId;
     }
-
 
     public String getName() {
         return name;
@@ -56,7 +48,6 @@ public class FoodItemDTO {
         this.expirationDate = expirationDate;
     }
 
-
     public double getPrice() {
         return price;
     }
@@ -73,7 +64,6 @@ public class FoodItemDTO {
         this.discountRate = discountRate;
     }
 
-
     public boolean isForDonation() {
         return isForDonation;
     }
@@ -89,7 +79,5 @@ public class FoodItemDTO {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
-
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
  * Interface for Data Access Object for the Transactions table.
  */
 public interface TransactionsDAO {
+
     List<TransactionDTO> getAllTransactions();
 
     TransactionDTO getTransactionById(int transactionId);

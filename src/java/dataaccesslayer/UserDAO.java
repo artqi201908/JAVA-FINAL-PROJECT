@@ -24,6 +24,4 @@ public interface UserDAO {
     void deleteUser(UserDTO user);
 
     public Integer validate(String username, String password);
-
-    public boolean emailExists(String email);
 }

@@ -12,10 +12,10 @@ CREATE DATABASE finalproject;
 USE finalproject;
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(255),
-    Email VARCHAR(255) UNIQUE,
+    Name VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
     Password VARCHAR(255),
-    Usertype INT
+    UserType INT NOT NULL
 );
 
 CREATE TABLE FoodItems (

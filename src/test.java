@@ -1,4 +1,6 @@
+
 public class test {
+
     public static void main(String[] args) {
         System.out.println("Hello, World!");
 
@@ -6,6 +8,5 @@ public class test {
 
         System.out.println("This is a new line of code");
     }
-
 
 }

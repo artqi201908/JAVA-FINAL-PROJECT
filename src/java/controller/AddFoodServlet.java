@@ -112,5 +112,3 @@ public class AddFoodServlet extends HttpServlet {
         }
     }
 }
-
-

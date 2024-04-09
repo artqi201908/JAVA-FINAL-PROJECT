@@ -79,20 +79,10 @@ public class LoginServlet extends HttpServlet {
 
         UserBusinessLogic userBL = new UserBusinessLogic();
         Integer userId = userBL.validateCredentialsAndGetUserId(username, password);
-
-        if (userId != null) {
-            request.getSession().setAttribute("userId", userId);
-            if (userId == 1) {
-                request.getRequestDispatcher("/Retailer.jsp").forward(request, response);
-            } else if (userId == 2) {
-                request.getRequestDispatcher("/consumers.jsp").forward(request, response);
-            } else if (userId == 3) {
-                request.getRequestDispatcher("/charity.jsp").forward(request, response);
-            }
-        } else {
-            request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
+        Integer type = userBL.getUserTypeByUsername(userId);
+        PrintWriter out = response.getWriter();
+        out.print(type);
+        out.print(username);
     }
 
     /**
