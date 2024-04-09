@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package businesslayer;
+package java.businesslayer;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,10 +15,10 @@ import dataaccesslayer.*;
  */
 public class UserBusinessLogic {
 
-    private UserDAO usersDao = null;
+    private dataaccesslayer.UserDAO usersDao = null;
 
     public UserBusinessLogic() {
-        usersDao = new UserDAOImpl();
+        usersDao = new dataaccesslayer.UserDAOImpl();
     }
 
     public List<UserDTO> getAllUsers() throws SQLException {

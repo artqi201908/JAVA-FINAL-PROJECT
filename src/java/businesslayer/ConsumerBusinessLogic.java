@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package businesslayer;
+package java.businesslayer;
 
 import dataaccesslayer.FoodItemDAO;
 import dataaccesslayer.FoodItemDAOImpl;
@@ -15,7 +15,7 @@ import transferobject.TransactionDTO;
  */
 public class ConsumerBusinessLogic {
 
-    private TransactionsDAO transactionsDAO;
+    private final TransactionsDAO transactionsDAO;
     private FoodItemDAO itemDAO;
 
 
@@ -66,3 +66,6 @@ public class ConsumerBusinessLogic {
 
     };
 }
+
+    private boolean checkInventoryAvailability(int itemId, int quantity) {
+    }

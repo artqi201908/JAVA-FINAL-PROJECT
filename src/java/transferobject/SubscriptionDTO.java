@@ -1,45 +1,33 @@
-package transferobject;
+package java.transferobject;
 
-public class SubscriptionDTO {
+public class SubscriptionDTO extends UserValidationResult {
 
-    private int subscriptionId;
-    private int userId;
-    private String location;
-    private String communicationMethod;
+    private Long id;
+    private Long itemId;
+    private Long userId;
 
-    public SubscriptionDTO() {
+    public Long getId() {
+        return id;
     }
 
-    public int getSubscriptionId() {
-        return subscriptionId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setSubscriptionId(int subscriptionId) {
-        this.subscriptionId = subscriptionId;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public int getUserId() {
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getCommunicationMethod() {
-        return communicationMethod;
-    }
-
-    public void setCommunicationMethod(String communicationMethod) {
-        this.communicationMethod = communicationMethod;
-    }
-
 }
+

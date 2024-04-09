@@ -1,4 +1,4 @@
-package dataaccesslayer;
+package java.dataaccesslayer;
 
 import transferobject.SubscriptionDTO;
 import java.util.List;

@@ -1,4 +1,4 @@
-package dataaccesslayer;
+package java.dataaccesslayer;
 
 import transferobject.FoodItemDTO;
 import java.util.List;
