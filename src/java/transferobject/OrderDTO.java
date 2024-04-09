@@ -3,7 +3,7 @@ package java.transferobject;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class OrderDTO {
+public class OrderDTO extends UserValidationResult {
 
     private Long id;
     private String title;
@@ -15,9 +15,8 @@ public class OrderDTO {
     private Long discount;
     private Boolean isSurplus;
 
-
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -56,12 +55,12 @@ public class OrderDTO {
         this.expirationDate = expirationDate;
     }
 
-    public Boolean getDonate() {
+    public Boolean getIsDonate() {
         return isDonate;
     }
 
-    public void setDonate(Boolean donate) {
-        isDonate = donate;
+    public void setIsDonate(Boolean denote) {
+        isDonate = denote;
     }
 
     public BigDecimal getPrice() {
@@ -80,16 +79,11 @@ public class OrderDTO {
         this.discount = discount;
     }
 
-    public Boolean getSurplus() {
+    public void setIsSurplus(Boolean isSurplus) {
+        this.isSurplus = isSurplus;
+    }
+
+    public Boolean getIsSurplus() {
         return isSurplus;
     }
-
-    public void setSurplus(Boolean surplus) {
-        isSurplus = surplus;
-    }
-
-
-
-
-
 }

@@ -1,8 +1,8 @@
-package transferobject;
+package java.transferobject;
 
 import java.util.Date;
 
-public class FoodItemDTO {
+public class FoodItemDTO extends UserValidationResult {
 
     private int itemId;
     private String name;
