@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import transferobject.UserDTO;
 import dataaccesslayer.*;
+import transferobject.UserValidationResult;
 
 /**
  *
@@ -33,7 +34,12 @@ public class UserBusinessLogic {
         return usersDao.addUser(user);
     }
 
-    public Integer getUserTypeByUsername(int userid) {
-        return usersDao.getUserTypeByUserID(userid);
+    public Integer getUserTypeByUsername(String username) {
+        return usersDao.getUserTypeByUserName(username);
     }
+
+    public UserValidationResult validateUserAndGetDetails(String username, String password) {
+        return usersDao.validateUserAndGetDetails(username, password);
+    }
+
 }

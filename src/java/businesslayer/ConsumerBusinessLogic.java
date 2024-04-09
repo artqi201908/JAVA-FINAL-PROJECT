@@ -18,15 +18,11 @@ public class ConsumerBusinessLogic {
     private final TransactionsDAO transactionsDAO;
     private FoodItemDAO itemDAO;
 
-
-   
     public ConsumerBusinessLogic() {
         this.transactionsDAO = new TransactionsDAOImpl();
         this.itemDAO = new FoodItemDAOImpl();
 
-
     }
-
 
     public void purchaseItem(int userId, int itemId, int quantity) throws Exception {
 
@@ -37,8 +33,12 @@ public class ConsumerBusinessLogic {
 
 
     
-   public void purchaseItem(int userId, int itemId, int quantity) throws Exception {
-        
+   
+
+    
+
+    public void purchaseItem(int userId, int itemId, int quantity) throws Exception {
+
         TransactionDTO transaction = new TransactionDTO();
         transaction.setUserId(userId);
         transaction.setItemId(itemId);
@@ -48,23 +48,29 @@ public class ConsumerBusinessLogic {
 
     }
 
-   
-    public List<TransactionDTO> getAllTransactions(){
-         return transactionsDAO.getAllTransactions();
-    };
+    public List<TransactionDTO> getAllTransactions() {
+        return transactionsDAO.getAllTransactions();
+    }
 
-    public Transaction getTransactionById(int transactionId){
+    ;
+
+    public Transaction getTransactionById(int transactionId) {
         return transactionsDAO.getTransactionById(transactionId);
-    };
+    }
 
-    public void addTransaction(Transaction transaction){
+    ;
+
+    public void addTransaction(Transaction transaction) {
         transactionsDAO.addTransaction(transaction);
-    };
+    }
 
-    public void updateTransaction(Transaction transaction){
+    ;
+
+    public void updateTransaction(Transaction transaction) {
         transactionsDAO.updateTransaction(transaction);
 
-    };
+    }
+;
 }
 
     private boolean checkInventoryAvailability(int itemId, int quantity) {

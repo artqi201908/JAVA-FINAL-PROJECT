@@ -1,6 +1,5 @@
 package java.dataaccesslayer;
 
-
 import java.util.List;
 
 /**
@@ -16,5 +15,4 @@ public interface TransactionsDAO {
 
     void updateTransaction(Transaction transaction);
 
-   
 }

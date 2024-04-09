@@ -5,107 +5,83 @@
 package java.controller;
 
 import businesslayer.FoodItemBusinessLogic;
+import dataaccesslayer.FoodItemDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import transferobject.FoodItemDTO;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
-/**
- *
- * @author phron
- */
 public class RetailerServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RetailerServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RetailerServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        FoodItemBusinessLogic foodDAO = new FoodItemBusinessLogic();
+
+        RequestDispatcher rd = request.getRequestDispatcher("Retailer.jsp");
+        rd.forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // Retrieve the user ID from the session
-        Integer userId = (Integer) request.getSession().getAttribute("userId");
-
-        FoodItemBusinessLogic inventoryBL = new FoodItemBusinessLogic();
-
-        // Assuming you have a method that fetches inventory based on user ID
-        List<FoodItemDTO> foodList = null;
-        try {
-            foodList = inventoryBL.getAllInventory(userId);
-        } catch (SQLExceptionList ex) {
-            log(ex.getMessage());
-        }
-
-        System.out.println("Size of foodList: " + foodList.size());
-
-        // Set the foodList attribute in the request scope
-        request.setAttribute("foodList", foodList);
-
-        // Forward the request to the Retailer.jsp page to display inventory
-        request.getRequestDispatcher("Retailer.jsp").forward(request, response);
-
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+
+        // Retrieve the user ID somehow, for example, from a session or a hidden form field.
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userID");
+
+        if (userId == null) {
+            // Handle case where user ID is not found. Redirect to login or error page.
+            response.sendRedirect("login.jsp"); // Or show an error message.
+            return;
+        }
+
+        try {
+            FoodItemDAOImpl foodItemDAO = new FoodItemDAOImpl();
+            List<FoodItemDTO> foodItems = foodItemDAO.getAllFoodItemsByUserId(userId);
+
+            // Start printing out the HTML response
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Food Items List</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Food Items</h1>");
+
+                // Check if there are food items to display
+                if (foodItems.isEmpty()) {
+                    out.println("<p>No food items found.</p>");
+                } else {
+                    out.println("<ul>");
+                    for (FoodItemDTO item : foodItems) {
+                        out.println("<li>");
+                        out.println("Name: " + item.getName() + ", ");
+                        out.println("Quantity: " + item.getQuantity() + ", ");
+                        out.println("Price: " + item.getPrice() + ", ");
+                        out.println("Expiration Date: " + item.getExpirationDate() + ", ");
+                        out.println("Discount Rate: " + item.getDiscountRate() + ", ");
+                        out.println("For Donation: " + (item.isForDonation() ? "Yes" : "No"));
+                        out.println("</li>");
+                    }
+                    out.println("</ul>");
+                }
+
+                out.println("</body>");
+                out.println("</html>");
+            }
+        } catch (SQLExceptionList ex) {
+            Logger.getLogger(RetailerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            // Handle SQL Exception by showing error message or logging.
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-}

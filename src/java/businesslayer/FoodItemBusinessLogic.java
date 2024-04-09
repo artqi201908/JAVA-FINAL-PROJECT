@@ -21,8 +21,13 @@ public class FoodItemBusinessLogic {
         foodItemDAO = new FoodItemDAOImpl();
     }
 
-    public List<FoodItemDTO> getAllInventory(int userID) throws SQLExceptionList {
-        return foodItemDAO.getAllFoodItems();
+    public List<FoodItemDTO> getAllFoodItemsByUserId(int userId) {
+        try {
+            return foodItemDAO.getAllFoodItemsByUserId(userId);
+        } catch (SQLExceptionList e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void addFoodItem(FoodItemDTO food) {

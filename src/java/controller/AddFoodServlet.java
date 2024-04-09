@@ -82,12 +82,7 @@ public class AddFoodServlet extends HttpServlet {
             boolean isForDonation = request.getParameter("isForDonation") != null;
 
             // Retrieve user ID from session (ensure user is logged in and has a valid session)
-            Integer userId = (Integer) request.getSession().getAttribute("userId");
-            if (userId == null) {
-                // Handle not logged in state, e.g., redirect to login page
-                response.sendRedirect("login.jsp");
-                return;
-            }
+            Integer userId = (Integer) request.getSession().getAttribute("userID");
 
             // Create and populate FoodItemDTO object
             FoodItemDTO foodItem = new FoodItemDTO();
@@ -97,14 +92,13 @@ public class AddFoodServlet extends HttpServlet {
             foodItem.setExpirationDate(expirationDate);
             foodItem.setDiscountRate(discountRate);
             foodItem.setForDonation(isForDonation);
-            foodItem.setUserId(userId); // Set the user ID
+            foodItem.setUserId(1); // Set the user ID
 
             // Use business logic to add the food item
             FoodItemBusinessLogic foodBL = new FoodItemBusinessLogic();
             foodBL.addFoodItem(foodItem);
 
-            // Redirect or forward after successful addition
-            response.sendRedirect("allfood.jsp"); // Adjust redirect as needed
+            response.sendRedirect("Retailer.jsp");
         } catch (Exception e) {
             e.printStackTrace();
             // Optionally, set an error message and forward/redirect to an error page or form page
