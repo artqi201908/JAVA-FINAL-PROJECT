@@ -8,14 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import transferobject.TransactionDTO;
 
-
-
 public class TransactionsDAOImpl implements TransactionsDAO {
 
-   
-
     public TransactionsDAOImpl() {
-       
+
     }
 
     @Override
@@ -26,10 +22,9 @@ public class TransactionsDAOImpl implements TransactionsDAO {
         ArrayList<TransactionDTO> transactions = new ArrayList<>();
 
         try {
-          
-           con = DataSource.getConnection();
-            
-            
+
+            con = DataSource.getConnection();
+
             String query = "SELECT * FROM Transactions ORDER BY TransactionId";
             pstmt = con.prepareStatement(query);
             rs = pstmt.executeQuery();
@@ -72,13 +67,13 @@ public class TransactionsDAOImpl implements TransactionsDAO {
 
         try {
             con = DataSource.getConnection();
-            
+
             String query = "SELECT * FROM Transactions WHERE TransactionId = ?";
             pstmt = con.prepareStatement(query);
             pstmt.setInt(1, transactionId);
             rs = pstmt.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 transaction = new Transaction();
                 transaction.setTransactionId(rs.getInt("TransactionId"));
                 transaction.setItemId(rs.getInt("ItemId"));
@@ -113,7 +108,7 @@ public class TransactionsDAOImpl implements TransactionsDAO {
 
         try {
             con = DataSource.getConnection();
-            
+
             String sql = "INSERT INTO Transactions (ItemId, UserId, TransactionType, TransactionDate) VALUES (?, ?, ?, ?)";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, transaction.getItemId());
@@ -144,7 +139,7 @@ public class TransactionsDAOImpl implements TransactionsDAO {
 
         try {
             con = DataSource.getConnection();
-            
+
             String sql = "UPDATE Transactions SET ItemId = ?, UserId = ?, TransactionType = ?, TransactionDate = ? WHERE TransactionId = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, transaction.getItemId());
@@ -169,5 +164,4 @@ public class TransactionsDAOImpl implements TransactionsDAO {
         }
     }
 
-    
 }

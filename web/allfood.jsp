@@ -1,63 +1,55 @@
 <%-- 
-    Document   : allfood.jsp
-    Created on : 2024年4月7日, 下午2:01:48
-    Author     : danni
+    Document   : allfood
+    Created on : Apr 9, 2024, 3:08:12 AM
+    Author     : phron
 --%>
 
-<%@page import="transferobject.FoodItemDTO"%>
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="transferobject.FoodItemDTO"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Purchase Item</title>
-        <link rel="stylesheet" href="style.css"> <!-- change it later -->
+        <title>All Food Items</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-
-        <div class="sidebar">
-            <img src="pics/logo.jpg" alt="Your Logo" class="sidebar-logo">
-            <a href="index.jsp">Home</a> <!-- Assuming you have a home page -->
-            <a href="allfood.jsp">All Food</a> <!-- Link to this page -->
-            <a href="LogoutServlet">Logout</a>
-
-        </div>
-
         <div class="content">
-            <h2>ALL Food</h2>
-            <table>
+            <h2>All Food Items</h2>
+            <table border="1">
                 <tr>
                     <th>Food Name</th>
                     <th>Quantity</th>
-                    <th>Price</th> <!-- Assuming you wanted Price here -->
+                    <th>Price</th>
                     <th>Expiration Date</th>
                     <th>Discount Rate</th>
+                    <th>For Donation</th>
                 </tr>
-                <%	
-                List<FoodItemDTO> foodList = (List<FoodItemDTO>) request.getAttribute("foodList");
-                if(foodList != null && !foodList.isEmpty()) {
-                    for (FoodItemDTO food : foodList) { 
+                <%
+                    List<FoodItemDTO> foodList = (List<FoodItemDTO>) request.getAttribute("foodlist"); // Make sure attribute name matches what's set in servlet
+                    if (foodList != null && !foodList.isEmpty()) {
+                        for (FoodItemDTO item : foodList) {
                 %>
                 <tr>
-                    <td><%= food.getName() %></td>
-                    <td><%= food.getQuantity() %></td>
-                    <td><%= food.getPrice() %></td> <!-- Corrected from getExpirationDate() -->
-                    <td><%= food.getExpirationDate() %></td>
-                    <td><%= food.getDiscountRate() %></td>
+                    <td><%= item.getName()%></td>
+                    <td><%= item.getQuantity()%></td>
+                    <td><%= item.getPrice()%></td>
+                    <td><%= item.getExpirationDate().toString()%></td>
+                    <td><%= item.getDiscountRate()%></td>
+                    <td><%= item.isForDonation() ? "Yes" : "No"%></td>
                 </tr>
-                <% 
+                <%
                     }
                 } else {
                 %>
                 <tr>
-                    <td colspan="5" style="text-align:center;">You do not have any food in the inventory.</td>
+                    <td colspan="6">No food items found.</td>
                 </tr>
-                <% 
-                }
+                <%
+                    }
                 %>
             </table>
         </div>
-
     </body>
 </html>

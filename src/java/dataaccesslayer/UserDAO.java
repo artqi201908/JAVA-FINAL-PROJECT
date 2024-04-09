@@ -6,6 +6,7 @@ package dataaccesslayer;
 
 import java.util.List;
 import transferobject.UserDTO;
+import transferobject.UserValidationResult;
 
 /**
  *
@@ -15,8 +16,6 @@ public interface UserDAO {
 
     List<UserDTO> getAllUsers();
 
-    Integer getUserTypeByUserID(int userID);
-
     boolean addUser(UserDTO User);
 
     void updateUser(UserDTO user);
@@ -24,4 +23,8 @@ public interface UserDAO {
     void deleteUser(UserDTO user);
 
     public Integer validate(String username, String password);
+
+    public Integer getUserTypeByUserName(String username);
+
+    public UserValidationResult validateUserAndGetDetails(String username, String password);
 }
