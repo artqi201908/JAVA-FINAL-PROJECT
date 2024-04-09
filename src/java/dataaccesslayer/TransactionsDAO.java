@@ -1,6 +1,6 @@
 package dataaccesslayer;
 
-import java.transferobject.TransactionDTO;
+
 import java.util.List;
 
 /**
@@ -9,11 +9,11 @@ import java.util.List;
 public interface TransactionsDAO {
     List<TransactionDTO> getAllTransactions();
 
-    TransactionDTO getTransactionById(int transactionId);
+    Transaction getTransactionById(int transactionId);
 
-    void addTransaction(TransactionDTO transaction);
+    void addTransaction(Transaction transaction);
 
-    void updateTransaction(TransactionDTO transaction);
+    void updateTransaction(Transaction transaction);
 
-    void deleteTransaction(int transactionId);
+   
 }

@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.sql.DataSource;
-import java.transferobject.TransactionDTO;
+
+
 
 public class TransactionsDAOImpl implements TransactionsDAO {
 
-    private final DataSource dataSource;
+   
 
-    public TransactionsDAOImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public TransactionsDAOImpl() {
+       
     }
 
     @Override
@@ -25,7 +25,10 @@ public class TransactionsDAOImpl implements TransactionsDAO {
         ArrayList<TransactionDTO> transactions = new ArrayList<>();
 
         try {
-            con = dataSource.getConnection();
+          
+           con = DataSource.getConnection();
+            
+            
             String query = "SELECT * FROM Transactions ORDER BY TransactionId";
             pstmt = con.prepareStatement(query);
             rs = pstmt.executeQuery();
@@ -60,21 +63,22 @@ public class TransactionsDAOImpl implements TransactionsDAO {
     }
 
     @Override
-    public TransactionDTO getTransactionById(int transactionId) {
+    public Transaction getTransactionById(int transactionId) {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        TransactionDTO transaction = null;
+        Transaction transaction = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSource.getConnection();
+            
             String query = "SELECT * FROM Transactions WHERE TransactionId = ?";
             pstmt = con.prepareStatement(query);
             pstmt.setInt(1, transactionId);
             rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                transaction = new TransactionDTO();
+            while(rs.next()) {
+                transaction = new Transaction();
                 transaction.setTransactionId(rs.getInt("TransactionId"));
                 transaction.setItemId(rs.getInt("ItemId"));
                 transaction.setUserId(rs.getInt("UserId"));
@@ -102,12 +106,13 @@ public class TransactionsDAOImpl implements TransactionsDAO {
     }
 
     @Override
-    public void addTransaction(TransactionDTO transaction) {
+    public void addTransaction(Transaction transaction) {
         Connection con = null;
         PreparedStatement pstmt = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSource.getConnection();
+            
             String sql = "INSERT INTO Transactions (ItemId, UserId, TransactionType, TransactionDate) VALUES (?, ?, ?, ?)";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, transaction.getItemId());
@@ -132,12 +137,13 @@ public class TransactionsDAOImpl implements TransactionsDAO {
     }
 
     @Override
-    public void updateTransaction(TransactionDTO transaction) {
+    public void updateTransaction(Transaction transaction) {
         Connection con = null;
         PreparedStatement pstmt = null;
 
         try {
-            con = dataSource.getConnection();
+            con = DataSource.getConnection();
+            
             String sql = "UPDATE Transactions SET ItemId = ?, UserId = ?, TransactionType = ?, TransactionDate = ? WHERE TransactionId = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, transaction.getItemId());
@@ -162,30 +168,5 @@ public class TransactionsDAOImpl implements TransactionsDAO {
         }
     }
 
-    @Override
-    public void deleteTransaction(int transactionId) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            con = dataSource.getConnection();
-            String sql = "DELETE FROM Transactions WHERE TransactionId = ?";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, transactionId);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
+    
 }
