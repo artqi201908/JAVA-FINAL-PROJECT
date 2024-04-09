@@ -60,18 +60,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserBusinessLogic authorBusinessLogic = new UserBusinessLogic();
-        List<UserDTO> users = null;
 
-        try {
-            users = authorBusinessLogic.getAllUsers();
-        } catch (SQLException ex) {
-            log(ex.getMessage());
-        }
-
-        request.setAttribute("authors", users);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/login.jsp");
-        dispatcher.forward(request, response);
     }
 
     /**
@@ -85,20 +74,22 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Retrieve username and password from the request
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        // Instantiate your business logic class
         UserBusinessLogic userBL = new UserBusinessLogic();
+        Integer userId = userBL.validateCredentialsAndGetUserId(username, password);
 
-        Integer userId = userBL.validateCredentials(username, password);
-
-        if (userId != null && userId > 0) {
+        if (userId != null) {
             request.getSession().setAttribute("userId", userId);
-            request.getRequestDispatcher("/Retailer.jsp").forward(request, response);
+            if (userId == 1) {
+                request.getRequestDispatcher("/Retailer.jsp").forward(request, response);
+            } else if (userId == 2) {
+                request.getRequestDispatcher("/consumers.jsp").forward(request, response);
+            } else if (userId == 3) {
+                request.getRequestDispatcher("/charity.jsp").forward(request, response);
+            }
         } else {
-            // If not valid, set an error message and forward back to the login page
             request.setAttribute("errorMessage", "Invalid username or password");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }

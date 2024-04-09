@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package dataaccesslayer;
 
 import java.sql.Connection;
@@ -12,7 +11,6 @@ import java.sql.SQLException;
 import transferobject.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  *
@@ -72,51 +70,24 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public UserDTO getUserByUserName(String name) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        UserDTO user = new UserDTO();
-        try {
-            con = DataSource.getConnection();
-            pstmt = con.prepareStatement(
-                    "SELECT * FROM Users WHERE Name = ?");
-            pstmt.setString(1, name);
-            rs = pstmt.executeQuery();
+    public Integer getUserTypeByUserID(int userID) {
+        Integer userType = null;
+        String sql = "SELECT Usertype FROM Users WHERE UserID=?";
 
-            while (rs.next()) {
-                int userId = rs.getInt("UserID");
-                String userName = rs.getString("Name");
-                String email = rs.getString("Email");
-                int role = rs.getInt("UserType");
+        try (Connection con = DataSource.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
-                user.setUserID(userId);
-                user.setName(userName);
-                user.setEmail(email);
-                user.setUserType(role);
+            pstmt.setInt(1, userID);
 
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    userType = rs.getInt("Usertype");
+                }
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log and handle appropriately in real applications
         }
 
-        return user;
+        return userType;
     }
 
     @Override
@@ -203,22 +174,19 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Integer validate(String username, String password) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        try {
-            con = DataSource.getConnection();
-            pstmt = con.prepareStatement("SELECT UserID FROM Users WHERE Username = ? AND Password = ?");
+        int id=0;
+        try (Connection con = DataSource.getConnection(); PreparedStatement pstmt = con.prepareStatement("SELECT UserID FROM Users WHERE Name = ? AND Password = ?")) {
             pstmt.setString(1, username);
             pstmt.setString(2, password); // Consider using hashed passwords
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    rs.getInt("UserID"); // Return the user ID
+                    id= rs.getInt("UserID"); // Return the user ID
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            e.printStackTrace(); // Log or handle the exception appropriately
         }
-        return 1;
+        return id; // Return null or a negative value if credentials are invalid
     }
 
     @Override

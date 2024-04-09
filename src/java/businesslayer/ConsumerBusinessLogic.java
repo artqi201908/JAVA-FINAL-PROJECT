@@ -7,7 +7,6 @@ package businesslayer;
 import dataaccesslayer.FoodItemDAO;
 import dataaccesslayer.FoodItemDAOImpl;
 import dataaccesslayer.TransactionsDAO;
-import dataaccesslayer.TransactionsDAOImpl;
 
 
 /**
@@ -18,10 +17,12 @@ public class ConsumerBusinessLogic {
     private TransactionsDAO transactionsDAO;
     private FoodItemDAO itemDAO;
   
+
    
     public ConsumerBusinessLogic() {
         this.transactionsDAO = new TransactionsDAOImpl();
         this.itemDAO = new FoodItemDAOImpl();
+
     }
     
    public void purchaseItem(int userId, int itemId, int quantity) throws Exception {
@@ -33,7 +34,6 @@ public class ConsumerBusinessLogic {
         transaction.setTransactionDate(new java.sql.Timestamp(new java.util.Date().getTime())); 
         transactionsDAO.addTransaction(transaction);
 
-       
         itemDAO.updateFoodItem(itemId, -quantity); 
     }
 

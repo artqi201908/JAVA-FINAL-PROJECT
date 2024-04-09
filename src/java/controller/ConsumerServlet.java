@@ -18,13 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ConsumerServlet extends HttpServlet {
     
-    private ConsumerBusinessLogic consumerBusinessLogic;
 
-    @Override
-    public void init() {
-   
-        this.consumerBusinessLogic = new ConsumerBusinessLogic();
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +29,8 @@ public class ConsumerServlet extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
 
           
-            consumerBusinessLogic.purchaseItem(userId, itemId, quantity);
+            ConsumerBusinessLogic consumerBusinessLogic = new ConsumerBusinessLogic();
+                    consumerBusinessLogic.purchaseItem(userId, itemId, quantity);
 
 
             response.sendRedirect(request.getContextPath() + "/purchaseSuccess.jsp");
