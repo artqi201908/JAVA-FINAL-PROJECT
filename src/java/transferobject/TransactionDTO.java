@@ -1,4 +1,4 @@
-package java.transferobject;
+package transferobject;
 
 import java.sql.Timestamp;
 
