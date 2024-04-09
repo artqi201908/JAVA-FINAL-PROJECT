@@ -44,7 +44,7 @@ public class OrderDTO extends UserValidationResult {
         return statusId;
     }
 
-    public void setStatusId(StatusOrder statusId) {
+    public void setStatusId(Long statusId) {
         this.statusId = statusId;
     }
 }

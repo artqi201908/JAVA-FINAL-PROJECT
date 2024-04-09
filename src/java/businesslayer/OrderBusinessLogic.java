@@ -4,38 +4,54 @@
  */
 package java.businesslayer;
 
-import dataaccesslayer.FoodItemDAO;
-import dataaccesslayer.FoodItemDAOImpl;
-import dataaccesslayer.TransactionsDAO;
-import transferobject.TransactionDTO;
 
-/**
+import java.transferobject.OrderDTO;
+import java.transferobject.UserDTO;
+import java.transferobject.UserType;
+import java.util.List; /**
  *
  * @author Shao Tang
  */
-public class ConsumerBusinessLogic {
+public class OrderBusinessLogic {
 
-    private final TransactionsDAO transactionsDAO;
-    private FoodItemDAO itemDAO;
+    private OrderDAO orderDao = null;
 
-    public ConsumerBusinessLogic() {
-        this.transactionsDAO = new TransactionsDAOImpl();
-        this.itemDAO = new FoodItemDAOImpl();
-
+    public OrderBusinessLogic() {
+        this.orderDao = new OrderDaoImpl();
     }
 
-    public void purchaseItem(int userId, int itemId, int quantity) throws Exception {
+    public OrderDTO findById(Long orderId) {
+        return orderDao.findById(orderId);
+    }
 
-        boolean isAvailable = checkInventoryAvailability(itemId, quantity);
-        if (!isAvailable) {
-            throw new Exception("Item not available in sufficient quantity.");
+    public List<OrderDTO> findAll(UserDTO user) {
+        if (user.getTypeId() == UserType.RETAILER) {
+            return orderDao.findForRetailer(user.getId());
+        } else {
+            return orderDao.findAll(user.getId());
         }
+    }
+
+    public void create(OrderDTO order) throws ValidateException.ValidationException {
+        validateOrder(order);
+        orderDao.create(order);
+    }
+
+    public void update(OrderDTO order) throws ValidateException.ValidationException {
+        validateOrder(order);
+        orderDao.update(order);
+    }
+
+    private void validateOrder(OrderDTO order) throws ValidateException.ValidationException {
+        ValidateItem.validateLong(order.getQuantity(), "Quantity");
+    }
 
 
-    
-   
 
-    
+
+
+
+
 
     public void purchaseItem(int userId, int itemId, int quantity) throws Exception {
 
