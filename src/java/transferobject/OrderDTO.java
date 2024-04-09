@@ -1,42 +1,27 @@
 package java.transferobject;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 public class OrderDTO extends UserValidationResult {
 
     private Long id;
-    private String title;
-    private String description;
+    private Long itemId;
     private Long quantity;
-    private Date expirationDate;
-    private Boolean isDonate;
-    private BigDecimal price;
-    private Long discount;
-    private Boolean isSurplus;
+    private String address;
+    private Long statusId;
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 
     public Long getQuantity() {
@@ -47,43 +32,19 @@ public class OrderDTO extends UserValidationResult {
         this.quantity = quantity;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
+    public String getAddress() {
+        return address;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Boolean getIsDonate() {
-        return isDonate;
+    public Long getStatusId() {
+        return statusId;
     }
 
-    public void setIsDonate(Boolean denote) {
-        isDonate = denote;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Long getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Long discount) {
-        this.discount = discount;
-    }
-
-    public void setIsSurplus(Boolean isSurplus) {
-        this.isSurplus = isSurplus;
-    }
-
-    public Boolean getIsSurplus() {
-        return isSurplus;
+    public void setStatusId(StatusOrder statusId) {
+        this.statusId = statusId;
     }
 }
