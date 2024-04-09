@@ -30,3 +30,4 @@ public class SubscriptionDTO extends UserValidationResult {
         this.userId = userId;
     }
 }
+

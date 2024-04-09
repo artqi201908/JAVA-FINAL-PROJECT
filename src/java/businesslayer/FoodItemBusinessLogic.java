@@ -6,6 +6,12 @@ package java.businesslayer;
 
 import dataaccesslayer.FoodItemDAOImpl;
 import transferobject.FoodItemDTO;
+
+import java.dataaccesslayer.FoodItemDAO;
+import java.dataaccesslayer.FoodItemDAOImpl;
+import java.transferobject.FoodItemDTO;
+import java.transferobject.UserDTO;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
@@ -15,22 +21,66 @@ import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
  */
 public class FoodItemBusinessLogic {
 
-    private FoodItemDAOImpl foodItemDAO = null;
+    private FoodItemDAO itemDao = null;
 
     public FoodItemBusinessLogic() {
-        foodItemDAO = new FoodItemDAOImpl();
+        this.itemDao = new FoodItemDAOImpl();
     }
 
-    public List<FoodItemDTO> getAllFoodItemsByUserId(int userId) {
-        try {
-            return foodItemDAO.getAllFoodItemsByUserId(userId);
-        } catch (SQLExceptionList e) {
-            e.printStackTrace();
-            return null;
+
+    public FoodItemDTO findById(Long itemId) {
+        return itemDao.findById(itemId);
+    }
+
+    public FoodItemDTO findById(Long userId, Long itemId) {
+        return itemDao.findById(userId, itemId);
+    }
+
+    public List<FoodItemDTO> findAll(Long userId) {
+        return itemDao.findAll(userId);
+    }
+
+    public List<FoodItemDTO> findSurplus(Long userId) {
+        return itemDao.findSurplus(userId);
+    }
+
+    public List<FoodItemDTO> findAllForConsumerToBuy() {
+        return itemDao.findAllForConsumerToBuy();
+    }
+
+    public List<FoodItemDTO> findAllForCharityToClaim() {
+        return itemDao.findAllForCharityToClaim();
+    }
+
+    public List<FoodItemDTO> findByUser(UserDTO user) {
+        List<FoodItemDTO> items = new ArrayList<>();
+        if (user.getTypeId() == UserType.RETAILER) {
+            items = findAll(user.getId());
+        } else if (user.getTypeId() == UserType.CONSUMER) {
+            items = findAllForConsumerToBuy();
+        } else if (user.getTypeId() == UserType.CHARITABLE_ORGANIZATION) {
+            items = findAllForCharityToClaim();
         }
+        return items;
     }
 
-    public void addFoodItem(FoodItemDTO food) {
-        foodItemDAO.addFoodItem(food);
+    public void create(FoodItemDTO item) throws ValidateException.ValidationException {
+        validateItem(item);
+        itemDao.addFood(item);
+    }
+
+    public void update(FoodItemDTO item) throws ValidateException.ValidationException {
+        validateItem(item);
+        itemDao.update(item);
+    }
+
+    public void delete(Long itemId) throws ValidateException.ValidationException {
+        itemDao.delete(itemId);
+    }
+
+    private void validateItem(FoodItemDTO item) throws ValidateException.ValidationException {
+        ValidateItem.validateString(item.getTitle(), "Title", 255);
+        ValidateItem.validateLong(item.getQuantity(), "Quantity");
+        ValidateItem.validateDate(item.getExpirationDate(), "ExpirationDate");
     }
 }

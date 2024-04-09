@@ -12,42 +12,43 @@ import java.sql.SQLException;
  *
  * @author phron
  */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class DataSource {
 
-    private static DataSource instance;
-    private static Connection connection;
+    private Connection connection = null;
+    private String url = "jdbc:mysql://localhost:3306/fwrp?useSSL=false"; // &allowPublicKeyRetrieval=true
+    private String username = "root";
+    private String password = "Mklahoilmj@1";
 
-    private String serverUrl = "jdbc:mysql://localhost:3306/finalproject";
-    private String userString = "root";
-    private String passwordString = "Mklahoilmj@1";
-    private String driverString = "com.mysql.cj.jdbc.Driver";
+    public DataSource() {
 
-    // Private constructor to prevent instantiation from outside the class
-    private DataSource() {
+    }
+
+    /*
+     * Only use one connection for this application, prevent memory leaks.
+     */
+    public Connection createConnection() throws SQLException {
+
         try {
+            if (connection != null) {
+                System.out.println("Cannot create new connection, one exists already");
+            } else {
+                // manually register mysql driver
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-            // Load the JDBC driver
-            Class.forName(driverString);
-            // Create the database connection
-            connection = DriverManager.getConnection(serverUrl, userString, passwordString);
-
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            // Handle the exception accordingly (logging, throwing a custom exception, etc.)
-
+                connection = DriverManager.getConnection(url, username, password);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
         }
-    }
-
-    // Method to provide a single instance of DBConnection (Singleton pattern)
-    public static synchronized DataSource getInstance() {
-        if (instance == null) {
-            instance = new DataSource();
-        }
-        return instance;
-    }
-
-    // Method to get the database connection
-    public Connection getConnection() {
         return connection;
     }
 }
