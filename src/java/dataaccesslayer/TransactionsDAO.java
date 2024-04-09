@@ -1,8 +1,9 @@
 package dataaccesslayer;
 
 
+import entity.Transaction;
 import java.util.List;
-
+import transferobject.TransactionDTO;
 /**
  * Interface for Data Access Object for the Transactions table.
  */

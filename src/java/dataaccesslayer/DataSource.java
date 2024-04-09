@@ -22,7 +22,7 @@ public class DataSource {
     private static Connection connection = null;
     private static String url = "jdbc:mysql://localhost:3306/finalproject?useSSL=false&allowPublicKeyRetrieval=true";
     private static String username = "root";
-    private static String password = "Mklahoilmj@1";
+    private static String password = "78952TYUHN";
 
     public DataSource() {
     }
