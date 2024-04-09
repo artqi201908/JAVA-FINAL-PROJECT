@@ -8,6 +8,6 @@
 
 function buyItem(itemId) {
     // need to code here
-    
+
     alert("Buying Item with ID: " + itemId);
 }
