@@ -6,6 +6,7 @@ package businesslayer;
 
 import dataaccesslayer.FoodItemDAO;
 import dataaccesslayer.TransactionsDAO;
+import java.transferobject.TransactionDTO;
 
 
 /**
@@ -16,8 +17,6 @@ public class ConsumerBusinessLogic {
     private TransactionsDAO transactionsDAO;
     private FoodItemDAO itemDAO;
   
-    public ConsumerBusinessLogic(){
-    }
     public ConsumerBusinessLogic(TransactionsDAO transactionsDAO, FoodItemDAO itemDAO) {
         this.transactionsDAO = transactionsDAO;
         this.itemDAO = itemDAO;
@@ -38,7 +37,6 @@ public class ConsumerBusinessLogic {
         transaction.setTransactionDate(new java.sql.Timestamp(new java.util.Date().getTime())); 
         transactionsDAO.addTransaction(transaction);
 
-       
         itemDAO.updateFoodItem(itemId, -quantity); 
     }
 

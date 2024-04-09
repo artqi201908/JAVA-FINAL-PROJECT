@@ -17,23 +17,25 @@
     <body>
     <center>
         <form action="LoginServlet" method="post">
-                   <div class="textfield">
-                <label for="email">Email Address</label>
-                <input type="text" name="email" id="email" placeholder="Email">
-                <span class="error" id="emailError">Email address should be non-empty</span>
+            <div class="textfield">
+                <label for="username">User Name</label>
+                <input type="text" name="username" id="username" placeholder="Name" required>
+                <span class="error" id="usernameError">User Name should be non-empty</span>
             </div>
 
             <div class="textfield">
-                <label for="pass">Password</label>
-                <input type="password" name="pass" id="pass" placeholder="Password">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" required>
                 <span class="error" id="passError">Password should be non-empty</span>
             </div>
 
+            <% if (request.getAttribute("errorMessage") != null) {%>
+            <p style="color: red;"><%= request.getAttribute("errorMessage")%></p>
+            <% }%>
+
             <button type="submit">Sign In</button>
- 
         </form>
         <p>Don't have an account? Sign up <a href="register.jsp">here</a></p>
-       
     </center>
-    </body>
+</body>
 </html>

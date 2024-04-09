@@ -4,13 +4,10 @@
  */
 package businesslayer;
 
-
-
 import java.sql.SQLException;
 import java.util.List;
 import transferobject.UserDTO;
 import dataaccesslayer.*;
-
 
 /**
  *
@@ -18,7 +15,7 @@ import dataaccesslayer.*;
  */
 public class UserBusinessLogic {
 
-    private UserDAO usersDao=null;
+    private UserDAO usersDao = null;
 
     public UserBusinessLogic() {
         usersDao = new UserDAOImpl();
@@ -28,10 +25,15 @@ public class UserBusinessLogic {
         return usersDao.getAllUsers();
     }
 
-    public Integer validateCredentials(String username, String password) {
-        return usersDao.validate(username, password);
-    }
+    public Integer validateCredentialsAndGetUserId(String username, String password) {
+    return usersDao.validate(username, password);
+}
 
     public boolean addUser(UserDTO user) {
-           return usersDao.addUser(user);   
-}}
+        return usersDao.addUser(user);
+    }
+
+    public Integer getUserTypeByUserID(int id) {
+        return usersDao.getUserTypeByUserID(id);
+    }
+}
