@@ -2,13 +2,14 @@ package dataaccesslayer;
 
 import transferobject.FoodItemDTO;
 import java.util.List;
+import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 /**
  * Interface for Data Access Object for FoodItems table.
  */
 public interface FoodItemDAO {
 
-    List<FoodItemDTO> getAllFoodItems();
+    List<FoodItemDTO> getAllFoodItemsByUserId(int userId) throws SQLExceptionList;
 
     FoodItemDTO getFoodItemById(int id);
 

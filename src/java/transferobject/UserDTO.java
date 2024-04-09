@@ -9,6 +9,7 @@ package transferobject;
  * @author phron
  */
 public class UserDTO {
+
     private int userID;
     private String name;
     private String email;
@@ -25,7 +26,7 @@ public class UserDTO {
     public void setUserID(int userId) {
         this.userID = userId;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -56,5 +57,5 @@ public class UserDTO {
 
     public void setUserType(int userType) {
         this.userType = userType;
-    }  
+    }
 }

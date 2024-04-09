@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transferobject.UserDTO;
+import transferobject.UserValidationResult;
 
 /**
  *
@@ -78,11 +79,23 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         UserBusinessLogic userBL = new UserBusinessLogic();
-        Integer userId = userBL.validateCredentialsAndGetUserId(username, password);
-        Integer type = userBL.getUserTypeByUsername(userId);
-        PrintWriter out = response.getWriter();
-        out.print(type);
-        out.print(username);
+        UserValidationResult result = userBL.validateUserAndGetDetails(username, password);
+        if (result != null) {
+            int id = result.getUserId();
+            int type = result.getUserType();
+            request.getSession().setAttribute("userID", id);
+            if (type == 1) {
+                response.sendRedirect(request.getContextPath() + "/Retailer.jsp");
+            } else if (type == 2) {
+                response.sendRedirect(request.getContextPath() + "/consumers.jsp");
+            } else if (type == 3) {
+                response.sendRedirect(request.getContextPath() + "/charity.jsp");
+            }
+        } else {
+            request.setAttribute("errorMessage", "Invalid username or password");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     /**
