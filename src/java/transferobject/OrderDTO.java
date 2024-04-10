@@ -1,4 +1,4 @@
-package transferobject;
+package java.transferobject;
 
 public class OrderDTO extends UserValidationResult {
     private Long id;
