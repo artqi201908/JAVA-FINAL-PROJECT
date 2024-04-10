@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package java.controller;
 
 
@@ -10,14 +7,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.registry.infomodel.User;
 import java.businesslayer.UserBusinessLogic;
 import java.math.BigDecimal;
 
 
 /**
  *
- * @author phron
+ * @author
  */
 public class RegisterServlet extends HttpServlet {
 
