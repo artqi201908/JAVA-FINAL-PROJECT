@@ -15,7 +15,7 @@
             %>
         </div>
         <div>
-            <FORM ACTION="LoginServlet" METHOD="POST">
+            <FORM ACTION="login.jsp" METHOD="POST">
                 <table>
                     <tr>
                         <td>Username:</td>
