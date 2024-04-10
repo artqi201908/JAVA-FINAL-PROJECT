@@ -18,7 +18,7 @@
             <img src="pics/logo.jpg" alt="Your Logo" class="sidebar-logo">
             <a href="index.jsp">Home</a> <!-- Assuming you have a home page -->
             <a href="allfood.jsp">All Food</a> 
-            <a href="addfood.jsp"> Add Inventory</a>
+            <a href="createfooditem.jsp"> Add Inventory</a>
             <a href="LogoutServlet">Logout</a>
 
         </div>

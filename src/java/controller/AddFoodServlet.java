@@ -56,7 +56,7 @@ public class AddFoodServlet extends HttpServlet {
         item.setCreateUserId(user.getId());
 
         try {
-            foodDAO.addFoodItem(item);
+            foodDAO.create(item);
 
             response.sendRedirect("listItem");
         } catch (ValidateException.ValidationException e) {

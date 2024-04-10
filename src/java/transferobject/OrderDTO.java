@@ -1,12 +1,21 @@
 package java.transferobject;
 
 public class OrderDTO extends UserValidationResult {
-
     private Long id;
     private Long itemId;
+    private String itemTitle;
     private Long quantity;
     private String address;
     private Long statusId;
+    private Long createUserId;
+
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
 
     public Long getId() {
         return id;
@@ -22,6 +31,14 @@ public class OrderDTO extends UserValidationResult {
 
     public void setItemId(Long itemId) {
         this.itemId = itemId;
+    }
+
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    public void setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
     }
 
     public Long getQuantity() {
@@ -44,7 +61,7 @@ public class OrderDTO extends UserValidationResult {
         return statusId;
     }
 
-    public void setStatusId(StatusOrder statusId) {
+    public void setStatusId(Long statusId) {
         this.statusId = statusId;
     }
 }
