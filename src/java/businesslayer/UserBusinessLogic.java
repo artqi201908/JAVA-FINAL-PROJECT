@@ -1,7 +1,12 @@
 package java.businesslayer;
 
-import javax.xml.registry.infomodel.User;
+
+import java.transferobject.UserDTO;
 import java.util.List;
+import java.transferobject.UserDTO;
+import java.dataaccesslayer.*;
+import java.transferobject.UserValidationResult;
+
 
 public class UserBusinessLogic {
     public UserBusinessLogic() {

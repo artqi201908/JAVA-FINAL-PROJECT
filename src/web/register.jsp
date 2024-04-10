@@ -53,7 +53,7 @@
 
             <button type="submit">Sign Up</button>
             <button type="reset">Reset</button>
-            <p>Already a user? Sign in <a href="login.jsp">here</a></p>
+            <p>Already a user? Sign in <a href="views/login.jsp">here</a></p>
 
         </form>
 
