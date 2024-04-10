@@ -1,6 +1,6 @@
 package java.transferobject;
 
-public class OrderDTO extends UserValidationResult {
+public class OrderDTO{
     private Long id;
     private Long itemId;
     private String itemTitle;
