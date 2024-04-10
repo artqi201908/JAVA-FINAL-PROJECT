@@ -10,7 +10,7 @@ import java.transferobject.StatusOrder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDAOImpl extends OrderDAO {
+public class OrderDAOImpl implements OrderDAO {
     @Override
     public void create(OrderDTO order) throws ValidateException.ValidationException {
         Connection con = null;
