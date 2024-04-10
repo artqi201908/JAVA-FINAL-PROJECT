@@ -1,6 +1,6 @@
 <div class="main-panel">
     <div class="left-panel">
-        <img src="pics/logo.jpg" title="">
+        <img src="pics/logo.jpg" title="" alt="">
     </div>
     <div class="right-panel">
         <div>
@@ -17,15 +17,19 @@
 
 
         <div>
-            <FORM ACTION="login" METHOD="POST">
+            <FORM ACTION="login.jsp" METHOD="POST">
                 <table>
                     <tr>
                         <td>Username:</td>
-                        <td><INPUT TYPE="TEXT" NAME="username" VALUE="retailer1"></td>
+                        <td><label>
+                            <INPUT TYPE="TEXT" NAME="username" VALUE="retailer1">
+                        </label></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><INPUT TYPE="password" NAME="password" VALUE="retailer1"></td>
+                        <td><label>
+                            <INPUT TYPE="password" NAME="password" VALUE="retailer1">
+                        </label></td>
                     </tr>
                     <tr>
                         <td></td>
