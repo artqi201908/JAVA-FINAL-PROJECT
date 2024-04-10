@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.transferobject.FoodItemDTO;
 import java.transferobject.UserDTO;
-import java.transferobject.UserType;
 import java.util.List;
 
 public class UpdateItemServlet extends HttpServlet {
@@ -73,7 +72,7 @@ public class UpdateItemServlet extends HttpServlet {
             }
 
             response.sendRedirect("listItem");
-        } catch (ValidateException.ValidationException e) {
+        } catch (ValidateException e) {
             request.setAttribute("errorMsg", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("updateItem.jsp");
             dispatcher.forward(request, response);

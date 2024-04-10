@@ -9,7 +9,6 @@ import java.dataaccesslayer.FoodItemDAO;
 import java.dataaccesslayer.FoodItemDAOImpl;
 import java.transferobject.FoodItemDTO;
 import java.transferobject.UserDTO;
-import java.transferobject.UserType;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;

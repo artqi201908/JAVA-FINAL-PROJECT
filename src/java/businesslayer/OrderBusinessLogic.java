@@ -4,7 +4,6 @@ import java.dataaccesslayer.OrderDAO;
 import java.dataaccesslayer.OrderDAOImpl;
 import java.transferobject.OrderDTO;
 import java.transferobject.UserDTO;
-import java.transferobject.UserType;
 import java.util.List;
 
 public class OrderBusinessLogic {
