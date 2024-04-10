@@ -1,50 +1,49 @@
-package transferobject;
+package java.transferobject;
 
-
+import java.math.BigDecimal;
 import java.util.Date;
 
+public class FoodItemDTO extends UserValidationResult {
 
-public class FoodItemDTO {
-
-
-    private int itemId;
-    private String name;
-    private int quantity;
+    private Long id;
+    private String title;
+    private String description;
+    private Long quantity;
     private Date expirationDate;
+    private Boolean isDonate;
+    private BigDecimal price;
+    private Long discount;
+    private Boolean isSurplus;
 
-
-
-    private double price;
-    private double discountRate;
-    private boolean isForDonation;
-    private int userId;
-
-
-    public FoodItemDTO() {
+    public Long getId() {
+        return this.id;
     }
 
-    public int getItemId() {
-        return itemId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public String getTitle() {
+        return title;
     }
 
-
-    public String getName() {
-        return name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getDescription() {
+        return description;
     }
 
-    public int getQuantity() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
@@ -56,40 +55,35 @@ public class FoodItemDTO {
         this.expirationDate = expirationDate;
     }
 
+    public Boolean getIsDonate() {
+        return isDonate;
+    }
 
-    public double getPrice() {
+    public void setIsDonate(Boolean denote) {
+        isDonate = denote;
+    }
+
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public double getDiscountRate() {
-        return discountRate;
+    public Long getDiscount() {
+        return discount;
     }
 
-    public void setDiscountRate(double discountRate) {
-        this.discountRate = discountRate;
+    public void setDiscount(Long discount) {
+        this.discount = discount;
     }
 
-
-    public boolean isForDonation() {
-        return isForDonation;
+    public void setIsSurplus(Boolean isSurplus) {
+        this.isSurplus = isSurplus;
     }
 
-    public void setForDonation(boolean forDonation) {
-        isForDonation = forDonation;
+    public Boolean getIsSurplus() {
+        return isSurplus;
     }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-
-
 }

@@ -1,32 +1,51 @@
 package transferobject;
 
-public class OrderDTO {
-    private int id;
-    private int itemId;
-    private double quantity;
+public class OrderDTO extends UserValidationResult {
+    private Long id;
+    private Long itemId;
+    private String itemTitle;
+    private Long quantity;
     private String address;
+    private Long statusId;
+    private Long createUserId;
 
-    public int getId() {
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
-    public double getQuantity() {
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    public void setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
+    }
+
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
@@ -36,5 +55,13 @@ public class OrderDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Long getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
     }
 }

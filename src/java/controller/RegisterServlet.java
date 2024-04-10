@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package java.controller;
 
 import businesslayer.UserBusinessLogic;
 import java.io.IOException;
@@ -56,17 +56,8 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String name = request.getParameter("login");
         String password = request.getParameter("pass");
-        String confirmPassword = request.getParameter("pass2");
         String userTypeStr = request.getParameter("userType");
-        
-       if (email == null || email.isEmpty() || name == null || name.isEmpty()
-                || password == null || password.isEmpty() || confirmPassword == null
-                || !password.equals(confirmPassword) || userTypeStr == null || userTypeStr.isEmpty()) {
-            request.setAttribute("error", "All fields are required and passwords must match.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
+
         int userType = mapUserTypeToInt(userTypeStr);
         UserDTO user = new UserDTO();
         user.setName(name);
@@ -76,7 +67,7 @@ public class RegisterServlet extends HttpServlet {
 
         UserBusinessLogic userLogic = new UserBusinessLogic();
         boolean isRegistered = userLogic.addUser(user);
-        if(isRegistered == true){
+        if (isRegistered == true) {
             response.sendRedirect("login.jsp");
         } else {
             request.setAttribute("error", "Registration failed. Email may already be in use or other error.");

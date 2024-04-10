@@ -1,492 +1,492 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>5</zoom_level>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>125</x>
-      <y>775</y>
-      <w>150</w>
-      <h>145</h>
-    </coordinates>
-    <panel_attributes>UserDTO
---
-- UserID: int
-- UserType: int
-- Email: String
-- Username: String
-- Password: String
---
-+ getUserID(): int
-+ setUserID(UserID: int): void
-+ getUserType(): int
-+ setUserType(UserType: int): void
-+ getEmail(): String
-+ setEmail(Email: String): void
-+ getUsername(): String
-+ setUsername(Username: String): void
-+ getPassword(): String
-+ setPassword(Password: String): void
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>325</x>
-      <y>710</y>
-      <w>180</w>
-      <h>75</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
-UserDAO
---
---
-+getAllUsers(): List&lt;UserDTO&gt; 
-+getUserByUsesName(userID:int): UserDTO
-+addUser(user userDTO):void 
-+updateUser(user userDTO):void 
-+deleteUser(user userDTO):void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>340</x>
-      <y>835</y>
-      <w>150</w>
-      <h>65</h>
-    </coordinates>
-    <panel_attributes>userDAOImpl
---
---
-+getAllUsers(): List&lt;UserDTO&gt; 
-+getUserByUsesName(userID:int): UserDTO
-+addUser(user userDTO):void 
-+updateUser(user userDTO):void 
-+deleteUser(user userDTO):void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>335</x>
-      <y>590</y>
-      <w>160</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>UserBusinessLogic
---
--userDTO:UserDTO
--userValidation:UserValidation
---
-+UserBusinessLogic()
-+getUser(username: String):UserDTO
-+getAllUser():List&lt;UserDTO&gt;
-+addUser(user:UserDTO):void
-+updateUser(user:UserDTO):void
-+deleteUser(user:userDTO):void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>60</x>
-      <y>620</y>
-      <w>170</w>
-      <h>65</h>
-    </coordinates>
-    <panel_attributes>Validator
---
-- USERNAME_LENGTH: int
-- PASSWORD_LENGTH: int
---
-+ validateUser(user: UserDTO): UserDTO
-- validateUsername(user: UserDTO): UserDTO
-- validatePassword(user: UserDTO): UserDTO
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>55</x>
-      <y>540</y>
-      <w>220</w>
-      <h>55</h>
-    </coordinates>
-    <panel_attributes>ValidationException
---
-+ ValidationException(): void
-+ ValidationException(message: String): void
-+ ValidationException(message: String, throwable: Throwable): void
-+ ValidationException(throwable: Throwable): void
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>290</x>
-      <y>475</y>
-      <w>255</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>LoginServlet
---
-#doGet(request: HttpServletRequest, response: HttpServletResponse)
-#doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>410</x>
-      <y>510</y>
-      <w>15</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>410</x>
-      <y>675</y>
-      <w>15</w>
-      <h>45</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>225</x>
-      <y>640</y>
-      <w>120</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;220.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>140</x>
-      <y>590</y>
-      <w>15</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>405</x>
-      <y>780</y>
-      <w>15</w>
-      <h>65</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>190</x>
-      <y>380</y>
-      <w>235</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>RegisterServlet
---
-#doGet(request: HttpServletRequest, response: HttpServletResponse)
-#doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>430</x>
-      <y>380</y>
-      <w>235</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>LogoutServlet
---
-#doGet(request: HttpServletRequest, response: HttpServletResponse)
-#doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>305</x>
-      <y>410</y>
-      <w>15</w>
-      <h>75</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>510</x>
-      <y>410</y>
-      <w>15</w>
-      <h>75</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>625</x>
-      <y>425</y>
-      <w>235</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>ConsumerServlet
---
-#doGet(request: HttpServletRequest, response: HttpServletResponse)
-#doPost(request: HttpServletRequest, response: HttpServletResponse)
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>625</x>
-      <y>480</y>
-      <w>240</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>RetailerServlet
---
-#doGet(request: HttpServletRequest, response: HttpServletResponse)
-#doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>625</x>
-      <y>530</y>
-      <w>245</w>
-      <h>35</h>
-    </coordinates>
-    <panel_attributes>OrganizationServlet
---
-#doGet(request: HttpServletRequest, response: HttpServletResponse)
-#doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>540</x>
-      <y>430</y>
-      <w>95</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>170.0;10.0;10.0;120.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>540</x>
-      <y>490</y>
-      <w>95</w>
-      <h>20</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>170.0;20.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>540</x>
-      <y>500</y>
-      <w>95</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>170.0;100.0;10.0;10.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>705</x>
-      <y>665</y>
-      <w>165</w>
-      <h>200</h>
-    </coordinates>
-    <panel_attributes>FoodItemDTO
---
-- itemID:String
-- name:String
-- quantity:int
-- expirationDate:Date
-- price:double
-- discountRate:double
-- isForDonation:boolean
---
-+FoodItemDTO()
-+getItemId():String
-+setItemId(itemId:String):void
-+getName():String
-+setName(name:String):void
-+getQuantity():int
-+setQuantity(quantity:int):void
-+getExpirationDate():Date
-+setExpirationDate(expirationDate:Date):void
-+getPrice():double
-+setPrice(price:double):void
-+getDiscountRate():double
-+setDiscountRate(discountRate:double):void
-+isForDonation():boolean
-+setForDonation(forDonation:boolean):void
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>965</x>
-      <y>700</y>
-      <w>185</w>
-      <h>65</h>
-    </coordinates>
-    <panel_attributes>FoodItemDAOImpl
---
---
-+getAllFoods(): List&lt;FoodItemDTO&gt; 
-+getFoodByFoodName(name: String):FoodItemDTO
-+addFood(food:FoodItemDTO):void 
-+updateFood(food:FoodItemDTO):void 
-+deleteFood(food:FoodItemDTO):void </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>965</x>
-      <y>450</y>
-      <w>165</w>
-      <h>85</h>
-    </coordinates>
-    <panel_attributes>FoodItemBusinessLogic
---
--foodItemDTO: FoodItemDTO
---
-+FoodItemBusinessLogic()
-+getFoodItem(name: String):FoodItemDTO
-+getAllFoodItem():List&lt;FoodItemDTO&gt;
-+addFoodItem(food:FoodItemDTO):void
-+updateFoodItem(food:FoodItemDTO):void
-+deleteFoodItem(user:FoodItemDTO):void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>960</x>
-      <y>580</y>
-      <w>180</w>
-      <h>75</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
-FoodItemDAO
---
---
-+getAllFoods(): List&lt;FoodItemDTO&gt; 
-+getFoodByFoodName(name: String):FoodItemDTO
-+addFood(food:FoodItemDTO):void 
-+updateFood(food:FoodItemDTO):void 
-+deleteFood(food:FoodItemDTO):void </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1045</x>
-      <y>650</y>
-      <w>15</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>270</x>
-      <y>850</y>
-      <w>80</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>860</x>
-      <y>730</y>
-      <w>115</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;210.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1030</x>
-      <y>530</y>
-      <w>15</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>855</x>
-      <y>440</y>
-      <w>120</w>
-      <h>45</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>220.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>860</x>
-      <y>495</y>
-      <w>115</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>865</x>
-      <y>520</y>
-      <w>110</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>200.0;10.0;10.0;60.0</additional_attributes>
-  </element>
+    <zoom_level>5</zoom_level>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>125</x>
+            <y>775</y>
+            <w>150</w>
+            <h>145</h>
+        </coordinates>
+        <panel_attributes>UserDTO
+            --
+            - UserID: int
+            - UserType: int
+            - Email: String
+            - Username: String
+            - Password: String
+            --
+            + getUserID(): int
+            + setUserID(UserID: int): void
+            + getUserType(): int
+            + setUserType(UserType: int): void
+            + getEmail(): String
+            + setEmail(Email: String): void
+            + getUsername(): String
+            + setUsername(Username: String): void
+            + getPassword(): String
+            + setPassword(Password: String): void
+        </panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>325</x>
+            <y>710</y>
+            <w>180</w>
+            <h>75</h>
+        </coordinates>
+        <panel_attributes>&lt;&lt;interface&gt;&gt;
+            UserDAO
+            --
+            --
+            +getAllUsers(): List&lt;UserDTO&gt; 
+            +getUserByUsesName(userID:int): UserDTO
+            +addUser(user userDTO):void 
+            +updateUser(user userDTO):void 
+            +deleteUser(user userDTO):void</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>340</x>
+            <y>835</y>
+            <w>150</w>
+            <h>65</h>
+        </coordinates>
+        <panel_attributes>userDAOImpl
+            --
+            --
+            +getAllUsers(): List&lt;UserDTO&gt; 
+            +getUserByUsesName(userID:int): UserDTO
+            +addUser(user userDTO):void 
+            +updateUser(user userDTO):void 
+            +deleteUser(user userDTO):void</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>335</x>
+            <y>590</y>
+            <w>160</w>
+            <h>90</h>
+        </coordinates>
+        <panel_attributes>UserBusinessLogic
+            --
+            -userDTO:UserDTO
+            -userValidation:UserValidation
+            --
+            +UserBusinessLogic()
+            +getUser(username: String):UserDTO
+            +getAllUser():List&lt;UserDTO&gt;
+            +addUser(user:UserDTO):void
+            +updateUser(user:UserDTO):void
+            +deleteUser(user:userDTO):void</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>60</x>
+            <y>620</y>
+            <w>170</w>
+            <h>65</h>
+        </coordinates>
+        <panel_attributes>Validator
+            --
+            - USERNAME_LENGTH: int
+            - PASSWORD_LENGTH: int
+            --
+            + validateUser(user: UserDTO): UserDTO
+            - validateUsername(user: UserDTO): UserDTO
+            - validatePassword(user: UserDTO): UserDTO
+        </panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>55</x>
+            <y>540</y>
+            <w>220</w>
+            <h>55</h>
+        </coordinates>
+        <panel_attributes>ValidationException
+            --
+            + ValidationException(): void
+            + ValidationException(message: String): void
+            + ValidationException(message: String, throwable: Throwable): void
+            + ValidationException(throwable: Throwable): void
+        </panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>290</x>
+            <y>475</y>
+            <w>255</w>
+            <h>40</h>
+        </coordinates>
+        <panel_attributes>LoginServlet
+            --
+            #doGet(request: HttpServletRequest, response: HttpServletResponse)
+            #doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>410</x>
+            <y>510</y>
+            <w>15</w>
+            <h>90</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>410</x>
+            <y>675</y>
+            <w>15</w>
+            <h>45</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>225</x>
+            <y>640</y>
+            <w>120</w>
+            <h>15</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>10.0;10.0;220.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>140</x>
+            <y>590</y>
+            <w>15</w>
+            <h>40</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>405</x>
+            <y>780</y>
+            <w>15</w>
+            <h>65</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+        <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>190</x>
+            <y>380</y>
+            <w>235</w>
+            <h>35</h>
+        </coordinates>
+        <panel_attributes>RegisterServlet
+            --
+            #doGet(request: HttpServletRequest, response: HttpServletResponse)
+            #doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>430</x>
+            <y>380</y>
+            <w>235</w>
+            <h>35</h>
+        </coordinates>
+        <panel_attributes>LogoutServlet
+            --
+            #doGet(request: HttpServletRequest, response: HttpServletResponse)
+            #doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>305</x>
+            <y>410</y>
+            <w>15</w>
+            <h>75</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>510</x>
+            <y>410</y>
+            <w>15</w>
+            <h>75</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>625</x>
+            <y>425</y>
+            <w>235</w>
+            <h>40</h>
+        </coordinates>
+        <panel_attributes>ConsumerServlet
+            --
+            #doGet(request: HttpServletRequest, response: HttpServletResponse)
+            #doPost(request: HttpServletRequest, response: HttpServletResponse)
+        </panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>625</x>
+            <y>480</y>
+            <w>240</w>
+            <h>40</h>
+        </coordinates>
+        <panel_attributes>RetailerServlet
+            --
+            #doGet(request: HttpServletRequest, response: HttpServletResponse)
+            #doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>625</x>
+            <y>530</y>
+            <w>245</w>
+            <h>35</h>
+        </coordinates>
+        <panel_attributes>OrganizationServlet
+            --
+            #doGet(request: HttpServletRequest, response: HttpServletResponse)
+            #doPost(request: HttpServletRequest, response: HttpServletResponse)</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>540</x>
+            <y>430</y>
+            <w>95</w>
+            <h>70</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>170.0;10.0;10.0;120.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>540</x>
+            <y>490</y>
+            <w>95</w>
+            <h>20</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>170.0;20.0;10.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>540</x>
+            <y>500</y>
+            <w>95</w>
+            <h>60</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>170.0;100.0;10.0;10.0;10.0;30.0</additional_attributes>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>705</x>
+            <y>665</y>
+            <w>165</w>
+            <h>200</h>
+        </coordinates>
+        <panel_attributes>FoodItemDTO
+            --
+            - itemID:String
+            - name:String
+            - quantity:int
+            - expirationDate:Date
+            - price:double
+            - discountRate:double
+            - isForDonation:boolean
+            --
+            +FoodItemDTO()
+            +getItemId():String
+            +setItemId(itemId:String):void
+            +getName():String
+            +setName(name:String):void
+            +getQuantity():int
+            +setQuantity(quantity:int):void
+            +getExpirationDate():Date
+            +setExpirationDate(expirationDate:Date):void
+            +getPrice():double
+            +setPrice(price:double):void
+            +getDiscountRate():double
+            +setDiscountRate(discountRate:double):void
+            +isForDonation():boolean
+            +setForDonation(forDonation:boolean):void
+        </panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>965</x>
+            <y>700</y>
+            <w>185</w>
+            <h>65</h>
+        </coordinates>
+        <panel_attributes>FoodItemDAOImpl
+            --
+            --
+            +getAllFoods(): List&lt;FoodItemDTO&gt; 
+            +getFoodByFoodName(name: String):FoodItemDTO
+            +addFood(food:FoodItemDTO):void 
+            +updateFood(food:FoodItemDTO):void 
+            +deleteFood(food:FoodItemDTO):void </panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>965</x>
+            <y>450</y>
+            <w>165</w>
+            <h>85</h>
+        </coordinates>
+        <panel_attributes>FoodItemBusinessLogic
+            --
+            -foodItemDTO: FoodItemDTO
+            --
+            +FoodItemBusinessLogic()
+            +getFoodItem(name: String):FoodItemDTO
+            +getAllFoodItem():List&lt;FoodItemDTO&gt;
+            +addFoodItem(food:FoodItemDTO):void
+            +updateFoodItem(food:FoodItemDTO):void
+            +deleteFoodItem(user:FoodItemDTO):void</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>UMLClass</id>
+        <coordinates>
+            <x>960</x>
+            <y>580</y>
+            <w>180</w>
+            <h>75</h>
+        </coordinates>
+        <panel_attributes>&lt;&lt;interface&gt;&gt;
+            FoodItemDAO
+            --
+            --
+            +getAllFoods(): List&lt;FoodItemDTO&gt; 
+            +getFoodByFoodName(name: String):FoodItemDTO
+            +addFood(food:FoodItemDTO):void 
+            +updateFood(food:FoodItemDTO):void 
+            +deleteFood(food:FoodItemDTO):void </panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>1045</x>
+            <y>650</y>
+            <w>15</w>
+            <h>60</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+        <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>270</x>
+            <y>850</y>
+            <w>80</w>
+            <h>15</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;.</panel_attributes>
+        <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>860</x>
+            <y>730</y>
+            <w>115</w>
+            <h>15</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;.</panel_attributes>
+        <additional_attributes>10.0;10.0;210.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>1030</x>
+            <y>530</y>
+            <w>15</w>
+            <h>60</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>855</x>
+            <y>440</y>
+            <w>120</w>
+            <h>45</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>220.0;70.0;10.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>860</x>
+            <y>495</y>
+            <w>115</w>
+            <h>15</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
+    </element>
+    <element>
+        <id>Relation</id>
+        <coordinates>
+            <x>865</x>
+            <y>520</y>
+            <w>110</w>
+            <h>40</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>200.0;10.0;10.0;60.0</additional_attributes>
+    </element>
 </diagram>

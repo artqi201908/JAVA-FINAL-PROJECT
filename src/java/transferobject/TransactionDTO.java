@@ -1,59 +1,52 @@
-package transferobject;
+package java.transferobject;
 
 import java.sql.Timestamp;
 
+public class TransactionDTO extends UserValidationResult{
 
-public class TransactionDTO {
-    private int transactionId;
-    private int itemId;
-    private int userId;
-    private String transactionType;
-    private Timestamp transactionDate;
+    private Long id;
+    private Long itemId;
+    private Long quantity;
+    private String address;
+    private Long statusId;
 
-    public TransactionDTO() {
+    public Long getId() {
+        return id;
     }
 
-    public int getTransactionId() {
-        return transactionId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public int getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
-    public int getUserId() {
-        return userId;
+    public Long getQuantity() {
+        return quantity;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 
-    public String getTransactionType() {
-        return transactionType;
+    public String getAddress() {
+        return address;
     }
 
-    public void setTransactionType(String transactionType) {
-        this.transactionType = transactionType;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Timestamp getTransactionDate() {
-        return transactionDate;
+    public Long getStatusId() {
+        return statusId;
     }
 
-    public void setTransactionDate(Timestamp transactionDate) {
-        this.transactionDate = transactionDate;
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
     }
-
-
-
-
 }
