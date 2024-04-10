@@ -1,10 +1,6 @@
-<%-- 
-    Document   : index
-    Created on : 2024年4月7日, 下午3:39:55
-    Author     : danni
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,8 +9,26 @@
 
     </head>
     <body>
+    <jsp:include page="Navbar.jsp" flush="true"/>
 
-    <jsp: flush="true"/>
+    <%
+        String username = (String) session.getAttribute("username");
+
+        if (username != null) {
+    %>
+
+    <jsp:include page="main.jsp" flush="true"/>
+
+    <%
+    } else {
+    %>
+
+    <jsp:include page="login.jsp" flush="true"/>
+
+    <%
+        }
+    %>
+
 
 
     </body>
