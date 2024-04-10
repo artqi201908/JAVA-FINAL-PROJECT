@@ -1,22 +1,22 @@
 package java.businesslayer;
 
-public class ValidateException {
-    public static class ValidationException extends Exception {
 
-        public ValidationException(){
+    public class ValidateException extends Exception {
+
+        public ValidateException(){
             super("Data not in valid format");
         }
 
-        public ValidationException(String message){
+        public ValidateException(String message){
             super(message);
         }
 
-        public ValidationException(String message, Throwable throwable){
+        public ValidateException(String message, Throwable throwable){
             super(message, throwable);
         }
 
-        public ValidationException(Throwable throwable){
+        public ValidateException(Throwable throwable){
             super(throwable);
         }
     }
-}
+

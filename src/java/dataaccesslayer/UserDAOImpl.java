@@ -4,6 +4,7 @@
  */
 package java.dataaccesslayer;
 
+
 import java.businesslayer.ValidateException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +13,9 @@ import java.sql.SQLException;
 import java.transferobject.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
- *
- * @author phron
+ * @author fengqi
+ * @since 4/2/2024
  */
 public class UserDAOImpl implements UserDAO {
     @Override
@@ -231,7 +231,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void create(UserDTO user) throws ValidateException.ValidationException {
+    public void create(UserDTO user) throws ValidateException.ValidateException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -248,7 +248,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidateException (e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
@@ -268,7 +268,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(UserDTO user) throws ValidateException.ValidationException {
+    public void update(UserDTO user) throws ValidateException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -286,7 +286,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidateException.(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {

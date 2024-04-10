@@ -1,92 +1,81 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-package java.controller;
 
-import businesslayer.UserBusinessLogic;
-import java.io.IOException;
-import java.io.PrintWriter;
+package java.controller;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transferobject.UserDTO;
+import javax.servlet.http.HttpSession;
+import java.businesslayer.ValidateException;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.transferobject.UserDTO;
+
 
 /**
  *
- * @author phron
+ * @author Danni
  */
-public class RegisterServlet extends HttpServlet {
+public class  RegisterServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+        private UserBusinessLogic userDAO = null;
+
+        public RegisterServlet() {
+            userDAO = new UserBusinessLogic();
+        }
+
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            Long type = Long.valueOf(request.getParameter("type"));
+            BigDecimal balance = request.getParameter("balance").equalsIgnoreCase("") ? null : new BigDecimal(request.getParameter("balance"));
+            Boolean isSubscribe = "on".equalsIgnoreCase(request.getParameter("isSubscribe"));
+
+
+            UserDTO user = new UserDTO();
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setEmail(email);
+            user.setPhone(phone);
+            user.setTypeId(type);
+            user.setBalance(balance);
+            user.setIsSubscribe(isSubscribe);
+            user.setCreateUserId(-1L);
+
+            try {
+                UserBusinessLogic.create(user);
+
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
+                session.setAttribute("user", UserBusinessLogic.findByUsername(username));
+
+                response.sendRedirect("listItem");
+            } catch (ValidateException.ValidationException e) {
+                request.setAttribute("errorMsg", e.getMessage());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("signup.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("signup.jsp");
+        dispatcher.forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String name = request.getParameter("login");
-        String password = request.getParameter("pass");
-        String userTypeStr = request.getParameter("userType");
-
-        int userType = mapUserTypeToInt(userTypeStr);
-        UserDTO user = new UserDTO();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setUserType(userType);
-
-        UserBusinessLogic userLogic = new UserBusinessLogic();
-        boolean isRegistered = userLogic.addUser(user);
-        if (isRegistered == true) {
-            response.sendRedirect("login.jsp");
-        } else {
-            request.setAttribute("error", "Registration failed. Email may already be in use or other error.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-            dispatcher.forward(request, response);
-        }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
-    private int mapUserTypeToInt(String userTypeStr) {
-        String userTypeLowerCase = userTypeStr.toLowerCase();
-        switch (userTypeLowerCase) {
-            case "retailer":
-                return 1;
-            case "consumer":
-                return 2;
-            case "charitableorganization":
-                return 3;
-            default:
-                return 0; // Invalid user type
-        }
+
+
+
     }
-}
+

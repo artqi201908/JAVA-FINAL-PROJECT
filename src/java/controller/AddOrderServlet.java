@@ -63,7 +63,7 @@ import java.transferobject.UserDTO;
                 orderDAO.create(order);
 
                 response.sendRedirect("listOrder");
-            } catch (ValidateException.ValidationException e) {
+            } catch (ValidateException e) {
                 request.setAttribute("errorMsg", e.getMessage());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("createOrder.jsp");
                 dispatcher.forward(request, response);

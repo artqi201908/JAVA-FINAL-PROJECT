@@ -1,5 +1,6 @@
 package java.dataaccesslayer;
 
+
 import java.businesslayer.ValidateException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
     @Override
-    public void create(OrderDTO order) throws ValidateException.ValidationException {
+    public void create(OrderDTO order) throws ValidateException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -28,7 +29,7 @@ public class OrderDAOImpl implements OrderDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidateException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
@@ -48,7 +49,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public void update(OrderDTO order) throws ValidateException.ValidationException {
+    public void update(OrderDTO order) throws ValidateException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -66,7 +67,7 @@ public class OrderDAOImpl implements OrderDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidateException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
