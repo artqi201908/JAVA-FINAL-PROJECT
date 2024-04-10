@@ -2,115 +2,69 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package java.controller;
 
-import businesslayer.UserBusinessLogic;
+import java.businesslayer.FoodItemBusinessLogic;
+import java.businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.transferobject.FoodItemDTO;
+import java.transferobject.UserDTO;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transferobject.UserDTO;
+import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author phron
+ * @author
  */
 public class LoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private UserBusinessLogic userDAO = null;
+    private FoodItemBusinessLogic itemDAO = null;
+
+    public LoginServlet() {
+        userDAO = new UserBusinessLogic();
+        itemDAO = new FoodItemBusinessLogic();
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       UserBusinessLogic authorBusinessLogic = new UserBusinessLogic();
-        List<UserDTO> users = null;
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
 
-        try {
-            users = authorBusinessLogic.getAllUsers();
-        } catch (SQLException ex) {
-            log(ex.getMessage());
+        UserDTO user = userDAO.findByUsername(username);
+        boolean isValid = user != null && user.getUsername().equalsIgnoreCase(username) && user.getPassword().equalsIgnoreCase(password);
+        if (isValid) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
+            session.setAttribute("user", user);
+
+            List<FoodItemDTO> items = itemDAO.findByUser(user);
+            request.setAttribute("items", items);
+
+        } else {
+            request.setAttribute("errorMsg", "Username or password is invalid.");
         }
 
-        request.setAttribute("authors", users);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-        @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Retrieve username and password from the request
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        // Instantiate your business logic class
-        UserBusinessLogic userBL = new UserBusinessLogic();
-        
-        boolean isValidUser = userBL.validateCredentials(username, password);
-        
-        if (isValidUser) {
-            request.getRequestDispatcher("/success.jsp").forward(request, response);
-        } else {
-            // If not valid, set an error message and forward back to the login page
-            request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
 
 }

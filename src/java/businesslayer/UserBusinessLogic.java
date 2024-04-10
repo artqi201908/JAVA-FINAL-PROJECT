@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package businesslayer;
+package java.businesslayer;
 
-import dataaccesslayer.UserDAOImpl;
+import java.dataaccesslayer.UserDAOImpl;
 import java.sql.SQLException;
+import java.transferobject.UserDTO;
 import java.util.List;
 import transferobject.UserDTO;
+import dataaccesslayer.*;
+import transferobject.UserValidationResult;
 
 /**
  *
@@ -15,20 +18,50 @@ import transferobject.UserDTO;
  */
 public class UserBusinessLogic {
 
-    private UserDAOImpl usersDao = null;
+    private UserDAOImpl userDao = null;
 
     public UserBusinessLogic() {
-        usersDao = new UserDAOImpl();
+        this.userDao = new UserDAOImpl();
     }
 
-    public List<UserDTO> getAllUsers() throws SQLException {
-        return usersDao.getAllUsers();
+    public UserDTO findByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 
-    public boolean validateCredentials(String username, String password) {
-        return usersDao.validate(username, password);
+    public UserDTO findByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 
-    public boolean addUser(UserDTO user) {
-           return usersDao.addUser(user);   
-}}
+    public void create(UserDTO user) throws ValidateException.ValidationException {
+        validateUser(user);
+        if (findByUsername(user.getUsername()) != null) {
+            throw new ValidateException.ValidationException("Username is exist.");
+        }
+        if (findByEmail(user.getEmail()) != null) {
+            throw new ValidateException.ValidationException("Email is exist.");
+        }
+        userDao.create(user);
+    }
+
+    public void update(UserDTO user) throws ValidateException.ValidationException {
+        validateUser(user);
+        userDao.update(user);
+    }
+
+    private void validateUser(UserDTO user) throws ValidateException.ValidationException {
+        ValidateItem.validateString(user.getUsername(), "Username", 30);
+        ValidateItem.validateString(user.getPassword(), "Password", 30);
+        ValidateItem.validateString(user.getEmail(), "Email", 30);
+    }
+
+
+    public UserDTO findById(Long userId) {
+        return userDao.findById(userId);
+    }
+
+    public List<UserDTO> findSubscribedUsers() {
+        return userDao.findSubscribedUsers();
+    }
+}
+
+}

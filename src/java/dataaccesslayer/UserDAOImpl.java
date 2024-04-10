@@ -2,269 +2,306 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package java.dataaccesslayer;
 
-package dataaccesslayer;
-
-import dataaccesslayer.UserDAO;
+import java.businesslayer.ValidateException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.transferobject.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
-import transferobject.UserDTO;
 
 /**
  *
  * @author phron
  */
 public class UserDAOImpl implements UserDAO {
-    public UserDAOImpl(){}
-    
     @Override
-    public List<UserDTO> getAllUsers() {
+    public UserDTO findById(Long id) {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        ArrayList<UserDTO> users = null;
-
+        UserDTO user = null;
         try {
-            con = DataSource.getConnection();
-
-            String query = "SELECT * FROM Users ORDER BY UserID";
-            pstmt = con.prepareStatement(query);
+            DataSource ds = new DataSource();
+            con = ds.createConnection();
+            pstmt = con.prepareStatement(
+                    "SELECT * FROM user where id = ?");
+            pstmt.setLong(1, id);
 
             rs = pstmt.executeQuery();
-            users = new ArrayList<>();
             while (rs.next()) {
-                UserDTO user = new UserDTO();
-                int userId = rs.getInt("UserID");
-                user.setUserID(userId);
-
-                String name = rs.getString("Name");
-                user.setName(name);
-                
-                user.setEmail(rs.getString("Email"));
-                user.setUserType(rs.getInt("Usertype"));
-                users.add(user);
+                user = new UserDTO();
+                user.setId(rs.getLong("id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setTypeId(rs.getLong("typeId"));
+                user.setBalance(rs.getBigDecimal("balance"));
+                user.setIsSubscribe(rs.getBoolean("isSubscribe"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+
         } finally {
             try {
-               if (rs != null) {
-                   rs.close();
-               }
-
-               if (pstmt != null) {
-                   pstmt.close();
-               }
-               if (con != null) {
-                   con.close();
-               }
-         } catch (SQLException ex) {
-               System.out.println(ex.getMessage());
-           }
-        }
-        return users;
-    }
-    @Override
-    public UserDTO getUserByUserName(String name) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        UserDTO user = new UserDTO();
-        try {
-            con = DataSource.getConnection();
-            pstmt = con.prepareStatement(
-                    "SELECT * FROM Users WHERE Name = ?");
-            pstmt.setString(1, name);
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                int userId = rs.getInt("UserID");
-                String userName = rs.getString("Name");
-                String email = rs.getString("Email");
-                int role =rs.getInt("UserType");
-
-                user.setUserID(userId);
-                user.setName(userName);
-                user.setEmail(email);
-                user.setUserType(role);
-
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
-
         return user;
     }
 
     @Override
-    public boolean addUser(UserDTO user) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        boolean success = false;
-        
-        try {
-            connection = DataSource.getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO Users (Email, Name, Password, UserType) VALUES (?, ?, ?, ?)");
-            preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setInt(4, user.getUserType());
-             
-            int rowsAffected = preparedStatement.executeUpdate();
-            success = rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return success;
-	}
-
-    @Override
-    public void updateUser(UserDTO user) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            con = DataSource.getConnection();
-            pstmt = con.prepareStatement(
-                    "UPDATE Users SET Name = ?, "
-                    + "Email = ?, Password=?, UserType=? WHERE UserID = ?");
-            pstmt.setString(1, user.getName());
-            pstmt.setString(2, user.getEmail());
-            pstmt.setString(3, user.getPassword());
-            pstmt.setInt(4, user.getUserID());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-//            try {
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
-        }
-    }
-
-    @Override
-    public void deleteUser(UserDTO user) {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            con = DataSource.getConnection();
-            pstmt = con.prepareStatement(
-                    "DELETE FROM Users WHERE UserID = ?");
-            pstmt.setInt(1, user.getUserID());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-//            try {
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
-        }
-    }
-    @Override
-     public boolean validate(String username, String password) {
+    public UserDTO findByUsername(String username) {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        boolean userExists = false;
-    try {
-        con = DataSource.getConnection();
-        String query = "SELECT COUNT(*) FROM Users WHERE Username = ? AND Password = ?";
-        pstmt = con.prepareStatement(query);
-        
-        pstmt.setString(1, username);
-        pstmt.setString(2, password);
-
-        rs = pstmt.executeQuery();
-
-        if (rs.next() && rs.getInt(1) > 0) {
-            userExists = true;
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
-        // Ensure resources are closed in finally block to avoid resource leaks
+        UserDTO user = null;
         try {
-            if (rs != null) {
-                rs.close();
+            DataSource ds = new DataSource();
+            con = ds.createConnection();
+            pstmt = con.prepareStatement(
+                    "SELECT * FROM user where username = ?");
+            pstmt.setString(1, username);
+
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                user = new UserDTO();
+                user.setId(rs.getLong("id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setTypeId(rs.getLong("typeId"));
+                user.setBalance(rs.getBigDecimal("balance"));
+                user.setIsSubscribe(rs.getBoolean("isSubscribe"));
             }
-            if (pstmt != null) {
-                pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
-            if (con != null) {
-                con.close();
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
+        return user;
     }
-    return userExists;
-     }
-     
-     @Override
-    public boolean emailExists(String email) {
-    Connection con = null;
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-        con = DataSource.getConnection();
-        pstmt = con.prepareStatement("SELECT Email FROM Users WHERE Email = ?");
-        pstmt.setString(1, email);
-        rs = pstmt.executeQuery();
-        return rs.next(); // If there's at least one row, the email exists
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
-        close(rs);
-        close(pstmt);
-        close(con);
-    }
-    return false;
-}
-     private void close(AutoCloseable closeable) {
-    if (closeable != null) {
+
+    @Override
+    public UserDTO findByEmail(String email) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        UserDTO user = null;
         try {
-            closeable.close();
-        } catch (Exception e) {
-            // Log the exception or handle it
-            System.out.println("Failed to close resource: " + e.getMessage());
+            DataSource ds = new DataSource();
+            con = ds.createConnection();
+            pstmt = con.prepareStatement(
+                    "SELECT * FROM user where email = ?");
+            pstmt.setString(1, email);
+
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                user = new UserDTO();
+                user.setId(rs.getLong("id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setTypeId(rs.getLong("typeId"));
+                user.setBalance(rs.getBigDecimal("balance"));
+                user.setIsSubscribe(rs.getBoolean("isSubscribe"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return user;
+    }
+
+    @Override
+    public List<UserDTO> findSubscribedUsers() {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<UserDTO> users = new ArrayList<>();
+        try {
+            DataSource ds = new DataSource();
+            con = ds.createConnection();
+            pstmt = con.prepareStatement(
+                    "SELECT * FROM user where isSubscribe = 1");
+
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                UserDTO user = new UserDTO();
+                user.setId(rs.getLong("id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setTypeId(rs.getLong("typeId"));
+                user.setBalance(rs.getBigDecimal("balance"));
+                user.setIsSubscribe(rs.getBoolean("isSubscribe"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return users;
+    }
+
+    @Override
+    public void create(UserDTO user) throws ValidateException.ValidationException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try {
+            DataSource ds = new DataSource();
+            con = ds.createConnection();
+
+            pstmt = con.prepareStatement("INSERT INTO user (username, password, email, typeId, balance, isSubscribe, createUserId, createDate) VALUES(?, ?, ?, ?, ?, ?, -1, now())");
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getEmail());
+            pstmt.setLong(4, user.getTypeId());
+            pstmt.setBigDecimal(5, user.getBalance());
+            pstmt.setBoolean(6, user.getIsSubscribe());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ValidateException.ValidationException(e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
-}
+
+    @Override
+    public void update(UserDTO user) throws ValidateException.ValidationException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try {
+            DataSource ds = new DataSource();
+            con = ds.createConnection();
+            pstmt = con.prepareStatement("UPDATE user " +
+                    "SET password=?, email=?, typeId=?, balance=?, isSubscribe=?, modUserId=-1, modDate=now()  " +
+                    "WHERE id = ?");
+            pstmt.setString(1, user.getPassword());
+            pstmt.setString(2, user.getEmail());
+            pstmt.setLong(3, user.getTypeId());
+            pstmt.setBigDecimal(4, user.getBalance());
+            pstmt.setBoolean(5, user.getIsSubscribe());
+            pstmt.setLong(6, user.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ValidateException.ValidationException(e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
 }

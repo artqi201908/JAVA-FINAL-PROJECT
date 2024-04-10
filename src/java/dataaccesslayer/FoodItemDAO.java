@@ -1,27 +1,23 @@
-package dataaccesslayer;
+package java.dataaccesslayer;
 
 
-import java.util.Date;
-import transferobject.FoodItemDTO;
+import java.businesslayer.ValidateException;
+import java.transferobject.FoodItemDTO;
 import java.util.List;
 
 /**
  * Interface for Data Access Object for FoodItems table.
  */
 public interface FoodItemDAO {
-    List<FoodItemDTO> getAllFoodItems();
 
-    List<FoodItemDTO> getFoodItemsByPage(int page, int itemsPerPage); // For pagination
-    List<FoodItemDTO> searchFoodItems(String keyword); // For searching by name or description
-    List<FoodItemDTO> getFoodItemsNearExpiration(Date date); // Items near or past expiration
-    FoodItemDTO getFoodItemById(int id);
-    void addFoodItem(FoodItemDTO foodItem);
-    void addFoodItems(List<FoodItemDTO> foodItems); // Bulk add
-    void updateFoodItem(FoodItemDTO foodItem);
-    void updateFoodItems(List<FoodItemDTO> foodItems); // Bulk update
-    void deleteFoodItem(FoodItemDTO foodItem);
-    void deleteFoodItems(List<FoodItemDTO> foodItems); // Bulk delete
-    // Statistical methods
-    int getTotalNumberOfFoodItems();
-    int getTotalQuantityOfFoodItems();
+    void addFood(FoodItemDTO item) throws ValidateException.ValidationException;
+    void update(FoodItemDTO item) throws ValidateException.ValidationException;
+    void delete(Long itemId) throws ValidateException.ValidationException;
+    List<FoodItemDTO> findAll(Long userId);
+    List<FoodItemDTO> findSurplus(Long userId);
+    List<FoodItemDTO> findAllForConsumerToBuy();
+    List<FoodItemDTO> findAllForCharityToClaim();
+
+    FoodItemDTO findById(Long itemId);
+    FoodItemDTO findById(Long userId, Long itemId);
 }

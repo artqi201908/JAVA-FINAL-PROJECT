@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package java.controller;
 
 import businesslayer.UserBusinessLogic;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,6 @@ public class RegisterServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -53,55 +53,40 @@ public class RegisterServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Retrieve form data
-        String name = request.getParameter("name");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String name = request.getParameter("login");
+        String password = request.getParameter("pass");
         String userTypeStr = request.getParameter("userType");
 
-        // Map userTypeStr to int
         int userType = mapUserTypeToInt(userTypeStr);
-
         UserDTO user = new UserDTO();
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
         user.setUserType(userType);
 
-        // Attempt to add user
         UserBusinessLogic userLogic = new UserBusinessLogic();
         boolean isRegistered = userLogic.addUser(user);
-
-        if (isRegistered) {
+        if (isRegistered == true) {
             response.sendRedirect("login.jsp");
         } else {
-            request.setAttribute("error", "Registration failed. Email may already be in use.");
+            request.setAttribute("error", "Registration failed. Email may already be in use or other error.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
             dispatcher.forward(request, response);
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
     private int mapUserTypeToInt(String userTypeStr) {
-        String userTypeLowerCase = userTypeStr.toLowerCase(); // Chuyển đổi thành chữ thường để so sánh
+        String userTypeLowerCase = userTypeStr.toLowerCase();
         switch (userTypeLowerCase) {
             case "retailer":
                 return 1;
             case "consumer":
                 return 2;
-            case "charitableorganization": // Chú ý rằng giá trị này cũng được chuyển thành chữ thường
+            case "charitableorganization":
                 return 3;
             default:
-                return 0; // Sử dụng để xác định giá trị không hợp lệ hoặc không nhận diện được
+                return 0; // Invalid user type
         }
     }
 }

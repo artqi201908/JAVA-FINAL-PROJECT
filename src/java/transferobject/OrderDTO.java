@@ -1,65 +1,51 @@
-package transferobject;
+package java.transferobject;
 
-import java.util.Date;
-
-public class OrderDTO {
-    private int id;
-    private int itemId;
-    private String itemName; // Added to display the name of the item
-    private double quantity;
+public class OrderDTO extends UserValidationResult {
+    private Long id;
+    private Long itemId;
+    private String itemTitle;
+    private Long quantity;
     private String address;
-    
-    private Date orderDate; // Added to record the date of the order
-    private String status; // Added to indicate the status of the order (e.g., "Completed", "Pending", "Cancelled")
+    private Long statusId;
+    private Long createUserId;
 
-    // Getter and setter for itemName
-    public String getItemName() {
-        return itemName;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
-    // Getter and setter for orderDate
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    // Getter and setter for status
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
-    public double getQuantity() {
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    public void setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
+    }
+
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
@@ -69,5 +55,13 @@ public class OrderDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Long getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
     }
 }
