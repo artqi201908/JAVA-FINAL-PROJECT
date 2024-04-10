@@ -53,9 +53,8 @@ public class UserBusinessLogic {
         return userDao.findById(userId);
     }
 
-    public List<UserDTO> findSubscribedUsers() {
-        return userDao.findSubscribedUsers();
-    }
-}
+
 
 }
+
+
