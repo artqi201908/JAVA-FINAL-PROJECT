@@ -1,4 +1,4 @@
 package java.businesslayer;
 
-public class DataFormat {
+public class DateFormat {
 }

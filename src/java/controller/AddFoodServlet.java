@@ -15,6 +15,7 @@ import java.businesslayer.FoodItemBusinessLogic;
 import java.businesslayer.ValidateException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.transferobject.FoodItemDTO;
 import java.transferobject.UserDTO;
 
@@ -47,7 +48,7 @@ public class AddFoodServlet extends HttpServlet {
         FoodItemDTO item = new FoodItemDTO();
         item.setTitle(title);
         item.setDescription(description);
-        item.setExpirationDate(DateUtil.format(expirationDate));
+        item.setExpirationDate(DateFormat.format(expirationDate));
         item.setQuantity(quantity);
         item.setPrice(price);
         item.setDiscount(discount);
