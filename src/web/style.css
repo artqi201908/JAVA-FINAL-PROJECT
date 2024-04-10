@@ -14,12 +14,13 @@ body {
 }
 .top-nav-bar>.logo {
     float: left;
+    width: 100px;
     margin-left: 10px;
 }
 .top-nav-bar>.profile {
     float: right;
     width: 200px;
-
+    margin-top: 4px;
 }
 .top-nav-bar>.profile>a {
     margin-right: 10px;
@@ -35,14 +36,18 @@ body {
 }
 .left-panel > img{
     float: right;
-
+    margin: 40px 0 0 40px;
 }
+
+
+
 .right-panel {
     float: right;
     width: 46%;
     height: 500px;
     padding: 40px 0 0 40px;
 }
+
 
 .left-nav-bar {
     width: 150px;
@@ -63,6 +68,7 @@ body {
 
 .left-nav-bar li a {
     display: block;
+    padding: 10px;
     text-decoration: none;
     color: #343a40;
 }
@@ -82,11 +88,5 @@ table td {
 
 .content {
     float: left;
-
+    margin: 0 10px;
 }
-
-
-
-
-
-
