@@ -13,9 +13,10 @@ import java.sql.SQLException;
 import java.transferobject.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- * @author fengqi
- * @since 4/2/2024
+ *
+ * @author phron
  */
 public class UserDAOImpl implements UserDAO {
     @Override
