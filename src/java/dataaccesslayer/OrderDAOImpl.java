@@ -1,19 +1,19 @@
 package java.dataaccesslayer;
 
 
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
+import java.constant.orderStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.transferobject.OrderDTO;
-import java.transferobject.StatusOrder;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
     @Override
-    public void create(OrderDTO order) throws ValidateException {
+    public void create(OrderDTO order) throws ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -29,7 +29,7 @@ public class OrderDAOImpl implements OrderDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException(e.getMessage());
+            throw new ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
@@ -49,7 +49,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public void update(OrderDTO order) throws ValidateException {
+    public void update(OrderDTO order) throws ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -67,7 +67,7 @@ public class OrderDAOImpl implements OrderDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException(e.getMessage());
+            throw new ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
@@ -151,7 +151,7 @@ public class OrderDAOImpl implements OrderDAO {
             con = ds.createConnection();
             pstmt = con.prepareStatement(
                     "select o.*, i.title as itemTitle from orders o, item i where o.itemId = i.id and o.statusId = ?");
-            pstmt.setLong(1, StatusOrder.PENDING_APPROVE);
+            pstmt.setLong(1, orderStatus.PENDING_APPROVE);
 
             rs = pstmt.executeQuery();
             while (rs.next()) {

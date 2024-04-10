@@ -1,5 +1,6 @@
 package java.businesslayer;
 
+import java.constant.UserType;
 import java.dataaccesslayer.OrderDAO;
 import java.dataaccesslayer.OrderDAOImpl;
 import java.transferobject.OrderDTO;
@@ -25,17 +26,17 @@ public class OrderBusinessLogic {
         }
     }
 
-    public void create(OrderDTO order) throws ValidateException.ValidationException {
+    public void create(OrderDTO order) throws ValidationException {
         validateOrder(order);
         orderDao.create(order);
     }
 
-    public void update(OrderDTO order) throws ValidateException.ValidationException {
+    public void update(OrderDTO order) throws ValidationException {
         validateOrder(order);
         orderDao.update(order);
     }
 
-    private void validateOrder(OrderDTO order) throws ValidateException.ValidationException {
+    private void validateOrder(OrderDTO order) throws ValidationException {
         ValidateItem.validateLong(order.getQuantity(), "Quantity");
     }
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<jsp:include page="views/topNavBar.jsp" flush="true"/>
+<jsp:include page="topNavBar.jsp" flush="true"/>
 
 <div class="main-panel">
     <div>

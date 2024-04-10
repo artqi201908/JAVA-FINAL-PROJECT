@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.businesslayer.FoodItemBusinessLogic;
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.io.IOException;
 
 public class DeleteItemServlet extends HttpServlet {
@@ -27,7 +27,7 @@ public class DeleteItemServlet extends HttpServlet {
         Long itemId = request.getParameter("itemId").equalsIgnoreCase("") ? null : Long.valueOf(request.getParameter("itemId"));
         try {
             foodDAO.delete(itemId);
-        } catch (ValidateException.ValidationException e) {
+        } catch (ValidationException e) {
             e.printStackTrace();
         }
 

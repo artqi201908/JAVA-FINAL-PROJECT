@@ -1,10 +1,6 @@
-<%--
-    Created on : Apr 2, 2024
-    Author     : fengqi
---%>
 <div class="main-panel">
     <div class="left-panel">
-        <img src="images/food.jpg" title="">
+        <img src="pics/logo.jpg" title="">
     </div>
     <div class="right-panel">
         <div>
@@ -19,7 +15,7 @@
             %>
         </div>
         <div>
-            <FORM ACTION="signin" METHOD="POST">
+            <FORM ACTION="login.jsp" METHOD="POST">
                 <table>
                     <tr>
                         <td>Username:</td>

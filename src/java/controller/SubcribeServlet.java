@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.businesslayer.UserBusinessLogic;
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.io.IOException;
 import java.transferobject.UserDTO;
 
@@ -29,7 +29,7 @@ public class SubcribeServlet extends HttpServlet {
             userService.update(user);
 
             response.sendRedirect("listItem");
-        } catch (ValidateException.ValidationException e) {
+        } catch (ValidationException e) {
             response.sendRedirect("listItem");
         }
 

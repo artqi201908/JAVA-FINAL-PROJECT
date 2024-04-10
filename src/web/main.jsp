@@ -1,8 +1,9 @@
-<%@ page import="javax.xml.registry.infomodel.User" %>
+
 <%@ page import="java.transferobject.UserDTO" %>
-<%@ page import="java.transferobject.UserType" %>
 <%@page import="java.transferobject.FoodItemDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.constant.UserType" %>
+<%@ page import="java.businesslayer.DateFormat" %>
 
 
 <%
@@ -54,7 +55,7 @@
                 <td><%= item.getId()%></td>
                 <td><%= item.getTitle()%></td>
                 <td><%= item.getQuantity()%></td>
-                <td <% if(DateUtil.isExpiredInNextWeek(item.getExpirationDate())) { out.print("style='color: red;'"); } %>>
+                <td <% if(DateFormat.isExpiredInNextWeek(item.getExpirationDate())) { out.print("style='color: red;'"); } %>>
                     <%= item.getExpirationDate()%>
                 </td>
                 <td><%= item.getIsDonate()%></td>
@@ -163,7 +164,7 @@
             </tr>
             </thead>
             <tbody>
-            <% List<FoodItemDTO> items = (List<FoodItemDTO) request.getAttribute("items");
+            <% List<FoodItemDTO> items = (List<FoodItemDTO>) request.getAttribute("items");
                 for (FoodItemDTO item : items) {%>
             <tr>
                 <td><%= item.getId()%></td>

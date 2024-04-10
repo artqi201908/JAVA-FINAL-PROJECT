@@ -1,6 +1,6 @@
 package java.dataaccesslayer;
 
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.sql.*;
 import java.transferobject.FoodItemDTO;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
     }
 
     @Override
-    public void addFood(FoodItemDTO item) throws ValidateException.ValidationException {
+    public void addFood(FoodItemDTO item) throws ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -31,7 +31,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
@@ -51,7 +51,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
     }
 
     @Override
-    public void update(FoodItemDTO item) throws ValidateException.ValidationException {
+    public void update(FoodItemDTO item) throws ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -74,7 +74,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
@@ -94,7 +94,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
     }
 
     @Override
-    public void delete(Long itemId) throws ValidateException.ValidationException {
+    public void delete(Long itemId) throws ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -107,7 +107,7 @@ public class FoodItemDAOImpl implements FoodItemDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
