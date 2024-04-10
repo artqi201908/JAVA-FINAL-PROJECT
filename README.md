@@ -1,5 +1,5 @@
 # High-Level Design Document
-This is the very beginning version of our high-level design file, we just flush it by accident. And we didn't make any changes.
+This is the very beginning version of our high-level design file, we just flush it by accident. And we didn't make any changes. If you go to folder "docs", you can see the diagram and some other files we made 3 weeks ago, they are the same, thank you:)
 
 ## Table of Contents
 
