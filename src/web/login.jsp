@@ -9,15 +9,15 @@
                 String errorMsg = (String) request.getAttribute("errorMsg");
                 if (errorMsg != null) {
             %>
-
             <h6 style="color: red"><%=errorMsg%></h6>
-
             <%
                 }
             %>
         </div>
+
+
         <div>
-            <FORM ACTION="signin" METHOD="POST">
+            <FORM ACTION="login" METHOD="POST">
                 <table>
                     <tr>
                         <td>Username:</td>
