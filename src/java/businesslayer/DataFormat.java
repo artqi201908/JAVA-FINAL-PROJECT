@@ -1,39 +1,33 @@
 package java.businesslayer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DataFormat {
 
-    private Connection connection = null;
-    private String url = "jdbc:mysql://localhost:3306/fwrp?useSSL=false"; // &allowPublicKeyRetrieval=true
-    private String username = "root";
-    private String password = "123456";
-
-    public DataFormat() {
-    }
-
-
-    public Connection createConnection() throws SQLException {
+    public static Date format(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
-            if (connection != null) {
-                System.out.println("Cannot create new connection, one exists already");
-            } else {
-                // manually register mysql driver
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                connection = DriverManager.getConnection(url, username, password);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
+            return sdf.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        return connection;
+
+        return null;
+    }
+
+    // is Expired within the next one week
+    public static boolean isExpiredInNextWeek(Date date) {
+        if (date == null) {
+            return false;
+        }
+
+        Date today = new Date();
+        long diff = date.getTime() - today.getTime();
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+
+        return diffDays < 7 && diffDays > 0;
     }
 }

@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package java.businesslayer;
 
 import java.dataaccesslayer.UserDAOImpl;
-import java.sql.SQLException;
 import java.transferobject.UserDTO;
 import java.util.List;
-import transferobject.UserDTO;
-import dataaccesslayer.*;
-import transferobject.UserValidationResult;
+
 
 /**
  *

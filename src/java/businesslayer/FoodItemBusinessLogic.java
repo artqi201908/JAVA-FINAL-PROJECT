@@ -4,8 +4,6 @@
  */
 package java.businesslayer;
 
-import dataaccesslayer.FoodItemDAOImpl;
-import transferobject.FoodItemDTO;
 
 import java.dataaccesslayer.FoodItemDAO;
 import java.dataaccesslayer.FoodItemDAOImpl;
