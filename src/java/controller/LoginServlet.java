@@ -5,6 +5,7 @@
 package java.controller;
 
 import java.businesslayer.FoodItemBusinessLogic;
+import java.businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.transferobject.FoodItemDTO;
 import java.transferobject.UserDTO;

@@ -1,7 +1,7 @@
 package java.dataaccesslayer;
 
 
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.transferobject.FoodItemDTO;
 import java.util.List;
 
@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface FoodItemDAO {
 
-    void addFood(FoodItemDTO item) throws ValidateException.ValidationException;
-    void update(FoodItemDTO item) throws ValidateException.ValidationException;
-    void delete(Long itemId) throws ValidateException.ValidationException;
+    void addFood(FoodItemDTO item) throws ValidationException;
+    void update(FoodItemDTO item) throws ValidationException;
+    void delete(Long itemId) throws ValidationException;
     List<FoodItemDTO> findAll(Long userId);
     List<FoodItemDTO> findSurplus(Long userId);
     List<FoodItemDTO> findAllForConsumerToBuy();

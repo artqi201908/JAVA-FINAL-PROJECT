@@ -1,13 +1,11 @@
 /* Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
         * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
         */
-        package java.dataaccesslayer;
+package java.dataaccesslayer;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.transferobject.UserValidationResult;
 import java.transferobject.UserDTO;
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 
 
 /**
@@ -20,7 +18,7 @@ public interface UserDAO {
     UserDTO findByUsername(String username);
     UserDTO findByEmail(String email);
     List<UserDTO> findSubscribedUsers();
-    void create(UserDTO user) throws  ValidateException.ValidationException;
-    void update(UserDTO user) throws  ValidateException.ValidationException;
+    void create(UserDTO user) throws  ValidationException;
+    void update(UserDTO user) throws  ValidationException;
 
 }

@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.businesslayer.FoodItemBusinessLogic;
 import java.businesslayer.OrderBusinessLogic;
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
+import java.constant.orderStatus;
 import java.io.IOException;
 import java.transferobject.FoodItemDTO;
 import java.transferobject.OrderDTO;
-import java.transferobject.StatusOrder;
 import java.transferobject.UserDTO;
 
 /**
@@ -55,7 +55,7 @@ import java.transferobject.UserDTO;
             order.setItemId(itemId);
             order.setQuantity(quantity);
             order.setAddress(address);
-            order.setStatusId(StatusOrder.PENDING_APPROVE);
+            order.setStatusId(orderStatus.PENDING_APPROVE);
             order.setCreateUserId(user.getId());
 
             try {
@@ -63,7 +63,7 @@ import java.transferobject.UserDTO;
                 orderDAO.create(order);
 
                 response.sendRedirect("listOrder");
-            } catch (ValidateException e) {
+            } catch (ValidationException e) {
                 request.setAttribute("errorMsg", e.getMessage());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("createOrder.jsp");
                 dispatcher.forward(request, response);

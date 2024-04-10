@@ -1,8 +1,8 @@
 <%@ page import="java.transferobject.UserDTO" %>
-<%@ page import="java.transferobject.UserType" %>
 <%@ page import="java.transferobject.OrderDTO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.transferobject.StatusOrder" %>
+<%@ page import="java.constant.UserType" %>
+<%@ page import="java.constant.orderStatus" %>
 <%
     UserDTO user = (UserDTO) session.getAttribute("user");
 %>
@@ -56,9 +56,9 @@
                 <td><%= order.getAddress()%></td>
                 <td>
                     <%
-                        if (order.getStatusId() == StatusOrder.PENDING_APPROVE) {
+                        if (order.getStatusId() == orderStatus.PENDING_APPROVE) {
                             out.print("Pending approve");
-                        }else if (order.getStatusId() == StatusOrder.APPROVED) {
+                        }else if (order.getStatusId() == orderStatus.APPROVED) {
                             out.print("Approved");
                         }
                     %>
@@ -116,9 +116,9 @@
                 <td><%= order.getAddress()%></td>
                 <td>
                     <%
-                        if (order.getStatusId() == StatusOrder.PENDING_APPROVE) {
+                        if (order.getStatusId() == orderStatus.PENDING_APPROVE) {
                             out.print("Pending approve");
-                        }else if (order.getStatusId() == StatusOrder.APPROVED) {
+                        }else if (order.getStatusId() == orderStatus.APPROVED) {
                             out.print("Approved");
                         }
                     %>
@@ -174,9 +174,9 @@
                 <td><%= order.getAddress()%></td>
                 <td>
                     <%
-                        if (order.getStatusId() == StatusOrder.PENDING_APPROVE) {
+                        if (order.getStatusId() == orderStatus.PENDING_APPROVE) {
                             out.print("Pending approve");
-                        }else if (order.getStatusId() == StatusOrder.APPROVED) {
+                        }else if (order.getStatusId() == orderStatus.APPROVED) {
                             out.print("Approved");
                         }
                     %>

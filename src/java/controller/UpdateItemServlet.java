@@ -9,7 +9,8 @@ import javax.servlet.http.HttpSession;
 import java.businesslayer.DateFormat;
 import java.businesslayer.FoodItemBusinessLogic;
 import java.businesslayer.UserBusinessLogic;
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
+import java.constant.UserType;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.transferobject.FoodItemDTO;
@@ -72,7 +73,7 @@ public class UpdateItemServlet extends HttpServlet {
             }
 
             response.sendRedirect("listItem");
-        } catch (ValidateException e) {
+        } catch (ValidationException e) {
             request.setAttribute("errorMsg", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("updateItem.jsp");
             dispatcher.forward(request, response);

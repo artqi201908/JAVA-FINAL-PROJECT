@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.businesslayer.ValidateException;
+import java.businesslayer.UserBusinessLogic;
+import java.businesslayer.ValidationException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.transferobject.UserDTO;
@@ -47,14 +48,14 @@ public class  RegisterServlet extends HttpServlet {
             user.setCreateUserId(-1L);
 
             try {
-                UserBusinessLogic.create(user);
+                userDAO.create(user);
 
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
-                session.setAttribute("user", UserBusinessLogic.findByUsername(username));
+                session.setAttribute("user", userDAO.findByUsername(username));
 
                 response.sendRedirect("listItem");
-            } catch (ValidateException.ValidationException e) {
+            } catch (ValidationException e) {
                 request.setAttribute("errorMsg", e.getMessage());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("signup.jsp");
                 dispatcher.forward(request, response);

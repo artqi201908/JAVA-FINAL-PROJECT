@@ -1,4 +1,4 @@
-<%@ page import="algonquin.entity.Item" %>
+<%@ page import="java.transferobject.FoodItemDTO" %>
 <html>
 <head>
     <link rel="stylesheet" href="css/main.css?v=<%=System.currentTimeMillis()%>>">
@@ -24,7 +24,7 @@
         </div>
         <div>
             <%
-                Item item = (Item) request.getAttribute("item");
+                FoodItemDTO item = (FoodItemDTO) request.getAttribute("item");
             %>
             <FORM ACTION="createOrder" METHOD="POST">
                 <table>
