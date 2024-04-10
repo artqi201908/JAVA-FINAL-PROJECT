@@ -65,21 +65,21 @@ public class FoodItemBusinessLogic {
         return items;
     }
 
-    public void create(FoodItemDTO item) throws ValidateException.ValidationException {
+    public void create(FoodItemDTO item) throws ValidationException {
         validateItem(item);
         itemDao.addFood(item);
     }
 
-    public void update(FoodItemDTO item) throws ValidateException.ValidationException {
+    public void update(FoodItemDTO item) throws ValidationException {
         validateItem(item);
         itemDao.update(item);
     }
 
-    public void delete(Long itemId) throws ValidateException.ValidationException {
+    public void delete(Long itemId) throws ValidationException {
         itemDao.delete(itemId);
     }
 
-    private void validateItem(FoodItemDTO item) throws ValidateException.ValidationException {
+    private void validateItem(FoodItemDTO item) throws ValidationException {
         ValidateItem.validateString(item.getTitle(), "Title", 255);
         ValidateItem.validateLong(item.getQuantity(), "Quantity");
         ValidateItem.validateDate(item.getExpirationDate(), "ExpirationDate");

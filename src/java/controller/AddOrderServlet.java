@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.businesslayer.FoodItemBusinessLogic;
 import java.businesslayer.OrderBusinessLogic;
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.io.IOException;
 import java.transferobject.FoodItemDTO;
 import java.transferobject.OrderDTO;
 import java.transferobject.StatusOrder;
 import java.transferobject.UserDTO;
 
-/**
-     * @author
+    /**
+     * @author Wenqi Tang
      */
     public class AddOrderServlet extends HttpServlet {
 
@@ -63,7 +63,7 @@ import java.transferobject.UserDTO;
                 orderDAO.create(order);
 
                 response.sendRedirect("listOrder");
-            } catch (ValidateException e) {
+            } catch (ValidationException e) {
                 request.setAttribute("errorMsg", e.getMessage());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("createOrder.jsp");
                 dispatcher.forward(request, response);

@@ -4,7 +4,7 @@
  */
 package java.dataaccesslayer;
 
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -231,7 +231,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void create(UserDTO user) throws ValidateException.ValidationException {
+    public void create(UserDTO user) throws ValidationException.ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -248,7 +248,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidationException.ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
@@ -268,7 +268,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(UserDTO user) throws ValidateException.ValidationException {
+    public void update(UserDTO user) throws ValidationException.ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -286,7 +286,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException.ValidationException(e.getMessage());
+            throw new ValidationException.ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {

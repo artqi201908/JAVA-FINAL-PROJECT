@@ -5,7 +5,6 @@
 package java.businesslayer;
 
 import java.dataaccesslayer.UserDAOImpl;
-import java.sql.SQLException;
 import java.transferobject.UserDTO;
 import java.util.List;
 import transferobject.UserDTO;
@@ -32,23 +31,23 @@ public class UserBusinessLogic {
         return userDao.findByEmail(email);
     }
 
-    public void create(UserDTO user) throws ValidateException.ValidationException {
+    public void create(UserDTO user) throws ValidationException.ValidationException {
         validateUser(user);
         if (findByUsername(user.getUsername()) != null) {
-            throw new ValidateException.ValidationException("Username is exist.");
+            throw new ValidationException.ValidationException("Username is exist.");
         }
         if (findByEmail(user.getEmail()) != null) {
-            throw new ValidateException.ValidationException("Email is exist.");
+            throw new ValidationException.ValidationException("Email is exist.");
         }
         userDao.create(user);
     }
 
-    public void update(UserDTO user) throws ValidateException.ValidationException {
+    public void update(UserDTO user) throws ValidationException.ValidationException {
         validateUser(user);
         userDao.update(user);
     }
 
-    private void validateUser(UserDTO user) throws ValidateException.ValidationException {
+    private void validateUser(UserDTO user) throws ValidationException.ValidationException {
         ValidateItem.validateString(user.getUsername(), "Username", 30);
         ValidateItem.validateString(user.getPassword(), "Password", 30);
         ValidateItem.validateString(user.getEmail(), "Email", 30);

@@ -7,6 +7,9 @@ import java.transferobject.UserDTO;
 import java.transferobject.UserType;
 import java.util.List;
 
+/**
+ * @author Wenqi Tang
+ */
 public class OrderBusinessLogic {
     private OrderDAO orderDao = null;
 
@@ -26,17 +29,17 @@ public class OrderBusinessLogic {
         }
     }
 
-    public void create(OrderDTO order) throws ValidateException.ValidationException {
+    public void create(OrderDTO order) throws ValidationException {
         validateOrder(order);
         orderDao.create(order);
     }
 
-    public void update(OrderDTO order) throws ValidateException.ValidationException {
+    public void update(OrderDTO order) throws ValidationException {
         validateOrder(order);
         orderDao.update(order);
     }
 
-    private void validateOrder(OrderDTO order) throws ValidateException.ValidationException {
+    private void validateOrder(OrderDTO order) throws ValidationException {
         ValidateItem.validateLong(order.getQuantity(), "Quantity");
     }
 }

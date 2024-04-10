@@ -1,7 +1,6 @@
 package java.dataaccesslayer;
 
-
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,9 +10,13 @@ import java.transferobject.StatusOrder;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author Wenqi Tang
+ */
 public class OrderDAOImpl implements OrderDAO {
     @Override
-    public void create(OrderDTO order) throws ValidateException {
+    public void create(OrderDTO order) throws ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -29,7 +32,7 @@ public class OrderDAOImpl implements OrderDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException(e.getMessage());
+            throw new ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {
@@ -49,7 +52,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public void update(OrderDTO order) throws ValidateException {
+    public void update(OrderDTO order) throws ValidationException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -67,7 +70,7 @@ public class OrderDAOImpl implements OrderDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ValidateException(e.getMessage());
+            throw new ValidationException(e.getMessage());
         } finally {
             try {
                 if (pstmt != null) {

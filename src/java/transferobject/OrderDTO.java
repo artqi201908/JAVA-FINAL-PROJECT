@@ -1,5 +1,8 @@
 package java.transferobject;
 
+/**
+ * @author Wenqi Tang
+ */
 public class OrderDTO{
     private Long id;
     private Long itemId;

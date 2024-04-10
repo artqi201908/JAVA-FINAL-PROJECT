@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.businesslayer.FoodItemBusinessLogic;
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.transferobject.FoodItemDTO;
@@ -59,7 +59,7 @@ public class AddFoodServlet extends HttpServlet {
             foodDAO.create(item);
 
             response.sendRedirect("listItem");
-        } catch (ValidateException.ValidationException e) {
+        } catch (ValidationException e) {
             request.setAttribute("errorMsg", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("createItem.jsp");
             dispatcher.forward(request, response);

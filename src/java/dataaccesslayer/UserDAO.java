@@ -4,9 +4,8 @@
  */
 package java.dataaccesslayer;
 
-import java.businesslayer.ValidateException;
+import java.businesslayer.ValidationException;
 import java.transferobject.UserDTO;
-import java.transferobject.UserValidationResult;
 import java.util.List;
 
 
@@ -20,6 +19,6 @@ public interface UserDAO {
     UserDTO findByUsername(String username);
     UserDTO findByEmail(String email);
     List<UserDTO> findSubscribedUsers();
-    void create(UserDTO user) throws ValidateException.ValidationException;
-    void update(UserDTO user) throws ValidateException.ValidationException;
+    void create(UserDTO user) throws ValidationException.ValidationException;
+    void update(UserDTO user) throws ValidationException.ValidationException;
 }
