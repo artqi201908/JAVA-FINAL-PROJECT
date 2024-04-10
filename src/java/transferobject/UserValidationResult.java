@@ -14,6 +14,8 @@ public abstract class UserValidationResult {
     private Long modUserId;
     private Date modDate;
 
+    //test push
+
     public Long getCreateUserId() {
         return this.createUserId;
     }
