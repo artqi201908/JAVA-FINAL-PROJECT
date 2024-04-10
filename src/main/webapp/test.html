@@ -1,0 +1,77 @@
+<html>
+<head>
+    <link rel="stylesheet" href="css/main.css?v=1711772320475>">
+</head>
+<body>
+
+<div class="top-nav-bar">
+    <div class="logo">
+        <h2>FWRP</h2>
+    </div>
+    <div class="profile">
+
+
+        <a href="singup">Sign up</a>
+        <a href="singin">Sign in</a>
+
+
+    </div>
+</div>
+
+
+<div class="main-panel">
+    <div class="left-nav-bar">
+        <ul>
+            <li>
+                <a href="listItem">List</a>
+            </li>
+            <li>
+                <a href="createItem">Create</a>
+            </li>
+            <li>
+                <a href="surplusItem">Surplus</a>
+            </li>
+            <li>
+                <a href="claimRequest">Claim request</a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <table border="1">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>title</th>
+                <th>quantity</th>
+                <th>expirationDate</th>
+                <th>isDonate</th>
+                <th>disCount</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% List<Item> items = (List<Item>) request.getAttribute("items");
+                for (Item item : items) {%>
+                <tr>
+                    <td><%= item.getId()%></td>
+                    <td><%= item.getTitle()%></td>
+                    <td><%= item.getQuantity()%></td>
+                    <td><%= item.getExpirationDate()%></td>
+                    <td><%= item.getIsDonate()%></td>
+                    <td><%= item.getDisCount()%></td>
+                    <td>
+                        <a>edit</a>
+                        <a>delete</a>
+                        <a>denote</a>
+                    </td>
+                </tr>
+                <% }%>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>
